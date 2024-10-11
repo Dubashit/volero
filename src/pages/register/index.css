@@ -1,0 +1,160 @@
+.registration__form .form__group input,
+.registration__form .form__group select {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.register__text {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.register__block {
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #F3F5F9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.already__btn {
+    width: 100%;
+    text-align: end;
+    margin-bottom: 20px;
+}
+
+.navbar {
+    width: 350px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.nav__first,
+.nav__second {
+    width: 20px;
+    height: 20px;
+    padding-bottom: 2px;
+    border-radius: 50%;
+    border: 3px solid #68070D;
+    text-align: center;
+    background-color: #68070D;
+    color: #fff;
+    font-weight: 600;
+}
+
+.nav__second {
+    background-color: #fff;
+    color: #68070D;
+}
+
+.nav__line {
+    width: 300px;
+    height: 3px;
+    background-color: #68070D;
+}
+
+.registration__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reg__form__group {
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+}
+
+.reg__form__group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.reg__form__group input,
+.reg__form__group select {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.reg__form__group select{
+    width: 100%;
+}
+
+.reg__form__title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.nav__second.active {
+    background-color: #68070D;
+    color: white;
+}
+
+.register__block__mobile{
+    display: none;
+}
+
+@media(max-width:768px) {
+    .register__block {
+        width: 400px;
+    }
+}
+
+@media(max-width:500px) {
+    .register__block {
+        width: 300px;
+    }
+
+    .log__form__actions {
+        width: 300px;
+    }
+
+    .navbar{
+        width: 200px;
+        margin-bottom: 20px;
+    }
+
+    .nav__first,
+    .nav__second{
+        width: 45px;
+    }
+
+    .reg__form__group input{
+        width: 93%;
+    }
+}
+
+@media(max-width:425px) {
+    .register__block {
+        display: none;
+    }
+
+    .register__block__mobile {
+        display: flex;
+        flex-direction: column;
+        background-color: #F3F5F9;
+        padding: 60px 20px;
+        text-align: center;
+    }
+
+    .reg__form__group input{
+        width: 95%;
+    }
+
+    .reg__form__group select{
+        width: 102%;
+    }
+}

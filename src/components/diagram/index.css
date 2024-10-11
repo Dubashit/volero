@@ -1,0 +1,194 @@
+.diagram__container{
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.options{
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10%;
+}
+
+.option{
+    width: 220px;
+    height: 120px;
+    background-color: #68070D;
+    color: white;
+    border-radius: 40px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.option__btn{
+    background-color: #68070D;
+    color: #fff;
+    height: 50px;
+    width: 120px;
+    border-radius: 20px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    transition: .5s ease;
+    border: 2px solid #fff;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.option__btn:hover{
+    background-color: #fff;
+    color: #68070D;
+    border: 2px solid #fff;
+    transition: .5s ease;
+}
+
+.option p{
+    font-size: 14px;
+}
+
+.option__title{
+    font-size: 20px;
+}
+
+.first__line__largeScreen,
+.second__line__largeScreen,
+.first__line__mediumScreen,
+.first__line__smallScreen,
+.second__line__smallScreen{
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: none;
+}
+
+.first__line__largeScreen,
+.second__line__largeScreen{
+    display: flex;
+}
+
+.diagram__logo{
+    background-color: #68070D;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.diagram__logo img{
+    width: 100%;
+}
+
+.client__block{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 3%;
+}
+
+.client__block div{
+    background-color: #68070D;
+    width: 200px;
+    border-radius: 25px;
+    padding: 18px;
+    height: min-content;
+    color: #fff;
+}
+
+.client__block div>p{
+    margin: 0;
+}
+
+.diagram__line{
+    display: none;
+    height: 900px;
+    width: 2px;
+    margin: 0 auto;
+    position: absolute;
+    top: 100;
+    z-index: 0;
+    background-color: #68070D;
+}
+
+@media(max-width:1024px){
+    .client__block{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 1%;
+    }
+}
+
+@media(max-width:950px){
+    .options{
+        flex-wrap: wrap;
+        row-gap: 20px;
+        justify-content: space-around;
+        position: absolute;
+    }
+
+    .option{
+        height: auto;
+    }
+    
+    .first__line__largeScreen{
+        display: none;
+    }
+
+    .first__line__mediumScreen{
+        display: flex;
+    }
+}
+
+@media(max-width:768px){
+    .first__line__mediumScreen,
+    .second__line__largeScreen{
+        display: none;
+    }
+
+    .options{
+        position: static;
+    }
+
+    .diagram__logo{
+        margin: 50px 0;
+    }
+
+    .client__block{
+        flex-direction: column;
+        width: 230px;
+        gap: 15px;
+    }
+    .client__block div{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .diagram__line{
+        display: flex;
+    }
+
+    .option>p,
+    .option>div,
+    .option>button,
+    .client__block>div{
+        z-index: 2;
+    }
+}
+
+@media(max-width:425px){
+    .option{
+        width: 230px;
+        box-sizing: border-box;
+    }
+}

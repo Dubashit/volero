@@ -1,0 +1,168 @@
+.home {
+    background-image: url('/public/homeBackground.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh;
+    position: relative;
+    top: 0;
+}
+
+.home__first__block {
+    padding-top: 60px;
+    text-align: center;
+}
+
+.slogan__text {
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+.home__second__block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 5%;
+    color: #68070D;
+    overflow-x: hidden;
+}
+
+.laptop__block {
+    height: 510px;
+    width: auto;
+    position: relative;
+    right: -400px;
+    margin-bottom: 50px;
+}
+
+.first__monitor {
+    height: 500px;
+    width: 1000px;
+    background-color: #959190;
+    border-radius: 20px;
+    padding: 7px;
+}
+
+.second__monitor {
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 7px 0 30px 7px;
+}
+
+.monitor__header {
+    height: 70px;
+    border-radius: 20px 0 0 0;
+}
+
+.monitor__body {
+    position: relative;
+    top: -5px;
+    height: 390px;
+    width: 700px;
+    border-radius: 0 0 0 20px;
+}
+
+.laptop__corpus {
+    position: relative;
+    left: -130px;
+    width: 100%;
+    height: 30px;
+    background-color: #7e7b7b;
+}
+
+.laptop__left {
+    width: 100px;
+    height: 100%;
+    background: linear-gradient(to right, #101010 0px, #3e3c3c 20px, transparent 40px);
+}
+
+.laptop__footer {
+    position: relative;
+    left: -130px;
+    width: 200%;
+    height: 10px;
+    border-radius: 0 80%;
+    background-color: #292828;
+}
+
+@media(max-width:1024px) {
+    .laptop__block {
+        right: -300px;
+    }
+}
+
+@media(max-width:950px) {
+    .slogan__text {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    .laptop__block {
+        right: -200px;
+    }
+}
+
+@media(max-width:750px) {
+    .home__first__block{
+        padding-top: 10px;
+    }
+
+    .laptop__block {
+        height: 410px;
+    }
+
+    .first__monitor {
+        height: 400px;
+    }
+
+    .monitor__header {
+        height: 50px;
+    }
+
+    .monitor__body {
+        height: 310px;
+        width: 500px;
+    }
+
+    .laptop__corpus {
+        left: -80px;
+    }
+
+    .laptop__footer {
+        left: -80px;
+    }
+}
+
+@media(max-width:500px) {
+    .home__second__block>.title {
+        position: relative;
+        top: -50px;
+        font-size: 30px;
+    }
+
+    .laptop__block {
+        right: -100px;
+    }
+
+    .laptop__block {
+        height: 350px;
+    }
+
+    .first__monitor {
+        height: 340px;
+    }
+
+    .monitor__body {
+        height: 250px;
+        width: 400px;
+    }
+}
+
+@media(max-width:376px) {
+    .laptop__block {
+        right: -30px;
+    }
+}

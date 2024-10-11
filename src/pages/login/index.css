@@ -1,0 +1,118 @@
+.login__block{
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #F3F5F9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.login__form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.log__form__group {
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+}
+
+.log__form__group label {
+    display: block;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.log__form__group input,
+.log__form__group select {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.log__form__actions{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.forgot__password{
+    width: 100%;
+    color: black;
+}
+
+.log__btn {
+    text-align: center;
+    width: 200px;
+    height: 60px;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 0 10px;
+    border-radius: 15px;
+    border: 2px, solid, #68070D;
+    background-color: #68070D;
+    color: white;
+    margin: 0 auto;
+    margin-top: 20px;
+    transition: .5s ease;
+}
+
+.log__btn:hover {
+    transition: .5s ease;
+    background-color: #fff;
+    border: 2px solid #68070D;
+    color: #68070D;
+    box-shadow: 0 4px 6px gray;
+}
+
+.login__block__mobile{
+    display: none;
+}
+
+@media(max-width:768px){
+    .login__block{
+        width: 400px;
+    }
+}
+
+@media(max-width:500px){
+    .login__block{
+        width: 300px;
+    }
+    .log__form__actions{
+        width: 300px;
+    }
+}
+
+@media(max-width:425px){
+    .login__block{
+        display: none;
+    }
+
+    .login__block__mobile{
+        display: flex;
+        flex-direction: column;
+        background-color: #F3F5F9;
+        padding: 60px 20px;
+        text-align: center;
+    }
+
+    .forgot__password{
+        width: min-content;
+        white-space: nowrap;
+    }
+
+    .log__btn{
+        width: 120px;
+        height: 40px;
+        font-size: 20px;
+        margin: 0;
+    }
+}

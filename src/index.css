@@ -1,13 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+html,
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    height: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    cursor: default;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+img {
+    -webkit-user-drag: none;
+}
+
+button {
+    all: unset;
+    cursor: pointer;
+}
+
+.main {
+    width: 100%;
+    padding-top: 60px;
+}
+
+.white__background {
+    position: inherit;
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.gray__background {
+    padding: 80px 0;
+    background-color: #F3F5F9;
+}
+
+.darkgray__background {
+    width: 100%;
+    padding: 80px 0;
+    background-color: #eeeded;
+}
+
+.title__block {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.title__block__center {
+    width: 165px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.title__line {
+    width: 50px;
+    height: 2px;
+    background-color: #68070D;
+}
+
+.title__text {
+    font-size: 20px;
+    color: #68070D;
+    font-weight: 500;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 50px;
+    margin: 30px 0;
+}
+
+.page__title {
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.description {
+    font-size: 24px;
+    font-weight: 350;
+    margin: 15px 0;
+}
+
+.subtitle {
+    font-weight: 600;
+    font-size: 24px;
+    margin: 15px 0;
+}
+
+p,
+li {
+    font-size: 18px;
+}
+
+a {
+    color: black;
+}
+
+.container {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+@media(max-width:950px) {
+    .title {
+        font-size: 40px;
+    }
+
+    p,
+    li,
+    a {
+        font-size: 16px;
+    }
+
+    html,
+    body {
+        width: 100%;
+    }
+}
+
+@media(max-width:425px){
+    .white__background {
+        padding: 40px 0;
+    }
+    
+    .gray__background {
+        padding: 40px 0;
+    }
+    
+    .darkgray__background {
+        padding: 40px 0;
+    }
 }

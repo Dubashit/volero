@@ -1,0 +1,34 @@
+.phone-input-container {
+    margin-bottom: 20px;
+    height: auto;
+}
+
+.phone-input-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.phone-input-container input {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.phone-input-container .flag-dropdown {
+    padding-left: 8px;
+}
+
+.phone-input-container .form-control {
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+.phone-input-container .flag-dropdown {
+    width: 50px;
+}
+
+.phone-input-container .selected-flag img {
+    width: 100px;
+    height: auto;
+}

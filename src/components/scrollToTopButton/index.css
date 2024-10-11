@@ -1,0 +1,21 @@
+.scroll__to__top {
+    position: fixed;
+    bottom: 27px;
+    right: 20px;
+    z-index: 10;
+}
+
+.scroll__button {
+    background-color: #68070D;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 50%;
+}
+
+.scroll__button > img {
+    width: 40px;
+    height: auto;
+}

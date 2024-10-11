@@ -1,0 +1,46 @@
+.blog__error__content{
+    height: 151px;
+    text-align: center;
+    color: #68070D;
+    font-size: 30px;
+}
+
+.blog__date{
+    font-size: 20px;
+}
+
+.blog__info img{
+    width: 700px;
+    height: 500px;
+    border-radius: 30px;
+    object-fit: cover;
+}
+
+.related__posts__row{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 2%;
+    row-gap: 30px;
+}
+
+.related__posts__block > .title{
+    margin-bottom: 60px;
+}
+
+.blog__details__date{
+    font-size: 20px;
+    padding: 0 10px;
+    margin-bottom: 30px;
+    color: #888;
+}
+
+.blog__detail__content{
+    cursor: default;
+}
+
+@media(max-width:425px){
+    .blog__details__date{
+        font-size: 18px;
+    }
+}

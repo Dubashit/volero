@@ -1,0 +1,41 @@
+.privacy__second__block {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.privacy__content{
+    width: 72%;
+}
+
+.privacy__list {
+    width: 22.222222%;
+    height: min-content;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #F3F5F9;
+}
+
+.privacy__link {
+    color: #68070D;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.privacy__list.fixed {
+    position: fixed;
+    width: 20%;
+    top: 80px;
+    right: 5%;
+}
+
+@media(max-width:768px){
+    .privacy__content{
+        width: 100%;
+    }
+
+    .privacy__list{
+        display: none;
+    }
+}

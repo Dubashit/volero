@@ -1,0 +1,53 @@
+.rotating__container {
+    width: 100%;
+    overflow: hidden;
+    padding: 5px 0;
+}
+
+.rotating__text {
+    display: flex;
+    white-space: nowrap;
+    animation: rotate-left 120s linear infinite;
+}
+
+.rotating__text span {
+    display: inline-block;
+    padding: 20px;
+    margin-right: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #68070D;
+    border-radius: 15px;
+    transition: .5s ease;
+}
+
+.rotating__text span:hover{
+    text-decoration: underline;
+    background-color: #68070D;
+    color: white;
+    transition: .5s ease;
+}
+
+@keyframes rotate-left {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-486%);
+    }
+}
+
+@media(max-width:900px){
+    .rotating__text span{
+        margin-right: 10px;
+    }
+    .rotating__text{
+        animation: rotate-left 100s linear infinite;
+    }
+}
+
+@media(max-width:500px){
+    .rotating__text{
+        animation: rotate-left 60s linear infinite;
+    }
+}
