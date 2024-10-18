@@ -15,7 +15,7 @@ export default function ProductPage() {
     
 
     useEffect(() => {
-        // window.scrollTo(0, 0)
+        window.scrollTo(0, 0)
         document.title = 'Volerò'
     }, [location])
 

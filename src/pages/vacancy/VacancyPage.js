@@ -113,10 +113,13 @@ export default function VacancyPage() {
                                         required
                                     />
                                 </div>
-                                <PhoneNumberInput
-                                    onPhoneSelect={setPhone}
-                                    onCountrySelect={setCountryCode}
-                                />
+                                <div className='form__group'>
+                                    <div className='group__title__option'>Phone number</div>
+                                    <PhoneNumberInput
+                                        onPhoneSelect={setPhone}
+                                        onCountrySelect={setCountryCode}
+                                    />
+                                </div>
                                 <div className='form__group'>
                                     <div className='group__title'>City</div>
                                     <input

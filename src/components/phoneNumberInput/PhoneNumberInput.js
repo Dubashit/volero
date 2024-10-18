@@ -19,9 +19,6 @@ export default function PhoneNumberInput({ onPhoneSelect, onCountrySelect }) {
 
     return (
         <div className="phone-input-container">
-            <div className='group__title__option'>
-                Phone number
-            </div>
             <PhoneInput
                 country={'ua'}
                 value={phone}

@@ -21,23 +21,32 @@
 .home__second__block {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin-left: 5%;
     color: #68070D;
     overflow-x: hidden;
+    height: 550px;
+    overflow: hidden;
+}
+
+.home__title__block{
+    width: 500px; 
+}
+
+.home__title__block>p{
+    color: #000;
 }
 
 .laptop__block {
     height: 510px;
-    width: auto;
+    width: 600px;
     position: relative;
-    right: -400px;
+    right: -200px;
     margin-bottom: 50px;
 }
 
 .first__monitor {
     height: 500px;
-    width: 1000px;
+    width: 100%;
     background-color: #959190;
     border-radius: 20px;
     padding: 7px;
@@ -68,13 +77,13 @@
 .laptop__corpus {
     position: relative;
     left: -130px;
-    width: 100%;
+    width: 1000px;
     height: 30px;
     background-color: #7e7b7b;
 }
 
 .laptop__left {
-    width: 100px;
+    width: 1000px;
     height: 100%;
     background: linear-gradient(to right, #101010 0px, #3e3c3c 20px, transparent 40px);
 }
@@ -88,9 +97,174 @@
     background-color: #292828;
 }
 
+
+
+
+
+.phone__block{
+    position: absolute;
+    top: 800px;
+    right: 380px;
+    width: 270px;
+    height: 480px;
+    border-radius: 40px;
+    background-color: #d6d3d3;
+    z-index: 9;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.phone__display{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border-radius: 40px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.phone__display>img{
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    object-fit: cover;
+}
+
+.phone__camera{
+    position: absolute;
+    top: 10;
+    right: 68px;
+    width: 50%;
+    height: 20px;
+    margin: 0 auto;
+    border-radius: 0 0 15px 15px;
+    background-color: black;
+}
+
+.phone__block1{
+    position: absolute;
+    top: 3px;
+    right: 41px;
+    width: 40%;
+    height: 5px;
+    background-color: #8b8b8b;
+    border-radius: 2px;
+}
+
+.phone__block2{
+    position: absolute;
+    top: 3px;
+    right: 30px;
+    width: 5px;
+    height: 5px;
+    background-color: #8b8b8b;
+    border-radius: 2.5px;
+}
+
+.phone__button__mute{
+    position: absolute;
+    top: 70px;
+    left: -3px;
+    width: 3px;
+    height: 25px;
+    border-radius: 10px 0 0 10px;
+    background-color: #b9b9b9;
+}
+
+.phone__button__volumeUp{
+    position: absolute;
+    top: 110px;
+    left: -3px;
+    width: 3px;
+    height: 35px;
+    border-radius: 10px 0 0 10px;
+    background-color: #b9b9b9;
+}
+
+.phone__button__volumeDown{
+    position: absolute;
+    top: 150px;
+    left: -3px;
+    width: 3px;
+    height: 35px;
+    border-radius: 10px 0 0 10px;
+    background-color: #b9b9b9;
+}
+
+.devices{
+    overflow: hidden;
+}
+
+
+
+
+
+.home__third__block{
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.home__third__block>.title__block__center{
+    width: 250px;
+}
+
+.home__content{
+    display: flex;
+    gap: 2%;
+}
+
+.home__content__item{
+    width: 32%;
+    text-align: start;
+}
+
+.home__content__item>.subtitle{
+    color: #68070D;
+}
+
+.home__content__item>img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.home__content__item:nth-child(2)>img{
+    height: 400px;
+}
+
+.home__content__item:nth-child(1)>img,
+.home__content__item:nth-child(3)>img{
+    margin-top: 50px;
+}
+
+
+
+@media(max-width:1225px) {
+    .laptop__block {
+        right: -300px;
+    }
+
+    .phone__block{
+        right: 280px;
+    }
+
+    .home__title__block{
+        width: 40%;
+    }
+}
+
 @media(max-width:1024px) {
     .laptop__block {
         right: -300px;
+    }
+    .laptop__block {
+        right: -400px;
+    }
+
+    .phone__block{
+        right: 180px;
     }
 }
 
@@ -101,7 +275,36 @@
     }
 
     .laptop__block {
-        right: -200px;
+        right: -400px;
+    }
+
+    .phone__block{
+        top: 850px;
+        right: 180px;
+        width: 220px;
+        height: 400px;
+    }
+    
+    .phone__camera{
+        right: 55px;
+    }
+    
+    .phone__button__mute{
+        position: absolute;
+        top: 60px;
+        left: -3px;
+        width: 3px;
+        height: 25px;
+        border-radius: 10px 0 0 10px;
+        background-color: #b9b9b9;
+    }
+    
+    .phone__button__volumeUp{
+        top: 100px;
+    }
+    
+    .phone__button__volumeDown{
+        top: 140px;
     }
 }
 
@@ -110,59 +313,96 @@
         padding-top: 10px;
     }
 
+    .home__second__block{
+        flex-direction: column;
+    }
+
+    .home__title__block{
+        width: 100%;
+    }
+
+    .devices{
+        height: 600px;
+    }
+
     .laptop__block {
-        height: 410px;
-    }
-
-    .first__monitor {
-        height: 400px;
-    }
-
-    .monitor__header {
-        height: 50px;
-    }
-
-    .monitor__body {
-        height: 310px;
-        width: 500px;
-    }
-
-    .laptop__corpus {
-        left: -80px;
-    }
-
-    .laptop__footer {
-        left: -80px;
-    }
-}
-
-@media(max-width:500px) {
-    .home__second__block>.title {
         position: relative;
-        top: -50px;
-        font-size: 30px;
+        top: -360px;
+        right: -300px;
     }
 
-    .laptop__block {
+    .phone__block{
+        position: relative;
+        top: 140px;
         right: -100px;
     }
 
-    .laptop__block {
-        height: 350px;
+    .home__second__block{
+        height: auto;
     }
 
-    .first__monitor {
-        height: 340px;
+    .home__content{
+        flex-direction: column;
+        row-gap: 40px;
+        margin-top: 80px;
     }
 
-    .monitor__body {
-        height: 250px;
-        width: 400px;
+    .home__content__item{
+        width: 100%;
+        padding-bottom: 20px;
+        box-sizing: border-box;
+        border-bottom: 2px solid #ccc;
+        text-align: center;
+    }
+
+    .home__content__item:last-child{
+        border: none;
+    }
+
+    .home__content__item>img{
+        width: 70%;
+    }
+
+    .home__content__item:nth-child(2)>img{
+        height: 300px;
+    }
+
+    .home__content__item:nth-child(1)>img,
+    .home__content__item:nth-child(3)>img{
+        margin: 0;
+    }
+}
+
+@media(max-width:425px) {
+    .laptop__block{
+        right: -300px;
+    }
+
+    .home__content__item>img{
+        width: 100%;
+        height: 200px;
+    }
+
+    .home__content__item:nth-child(2)>img{
+        height: 200px;
     }
 }
 
 @media(max-width:376px) {
-    .laptop__block {
-        right: -30px;
+    .devices{
+        display: none;
+    }
+
+    .phone__block{
+        top: 0;
+        left: 50px;
+    }
+
+    .laptop__block{
+        display: none;
+    }
+
+    .home__second__block{
+        height: auto;
     }
 }

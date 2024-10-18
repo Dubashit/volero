@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "./config";
+import { API_URL, PUBLIC_URL } from "./config";
 
 export const getTags = async () => {
     try {
@@ -12,7 +12,7 @@ export const getTags = async () => {
 
 export const getBlogs = async () => {
     try {
-        const response = await axios.get(`${API_URL}/articles`);
+        const response = await axios.get(`${API_URL}/articles/search?status=active`);
         return response.data
     } catch (error) {
         console.error(error);
@@ -45,7 +45,7 @@ export const getRelatedArticles = async (item) => {
 };
 
 export const getArticlesPreview = (item) => {
-    return (<img src={`http://localhost:3001/public${item.preview}`} alt={item.title} />)
+    return (<img src={`${PUBLIC_URL}${item.preview}`} alt={item.title} />)
 }
 
 export const getVacancies = async () => {
@@ -74,15 +74,48 @@ export const postResume = async (formData, navigate) => {
 export const getTestimonials = async () => {
     try {
         const response = await axios.get(`${API_URL}/testimonials`)
-        console.log(response.data);
-        
         return response.data
-        
     } catch (error) {
         console.error(error);
     }
 }
 
 export const getTestimonialAuthorImage = (item) => {
-    return (<img src={`http://localhost:3001/public${item.image}`} alt={item.title} />)
+    return (<img src={`${PUBLIC_URL}${item.image}`} alt={item.title} />)
+}
+
+export const postRequestRegister = async (formData, navigate) => {
+    try {
+        const response = await axios.post(`${API_URL}/requestRegister`, formData, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.status === 200) {
+            alert('Data sent');
+            navigate('/')
+        } else {
+            alert('Error sending data');
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const postLogin = async (data) => {
+    try {
+        const response = await axios.post('https://www.volero.net/reseller/auth', data, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (response.status === 200) {
+            console.log('Login successful');
+            window.location.href = 'https://www.volero.net/reseller/home';
+        } else {
+            alert('Please enter all fields')
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }

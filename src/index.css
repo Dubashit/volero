@@ -28,7 +28,7 @@ button {
 }
 
 .white__background {
-    position: inherit;
+    width: 100%;
     padding: 80px 0;
     background-color: #fff;
 }

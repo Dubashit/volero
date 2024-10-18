@@ -76,6 +76,28 @@
     display: none;
 }
 
+.login__block__mobile{
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+    background-color: #F3F5F9;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.forgot__password{
+    width: min-content;
+    white-space: nowrap;
+}
+
+.log__btn{
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
+    margin: 0;
+}
+
 @media(max-width:768px){
     .login__block{
         width: 400px;
@@ -88,31 +110,5 @@
     }
     .log__form__actions{
         width: 300px;
-    }
-}
-
-@media(max-width:425px){
-    .login__block{
-        display: none;
-    }
-
-    .login__block__mobile{
-        display: flex;
-        flex-direction: column;
-        background-color: #F3F5F9;
-        padding: 60px 20px;
-        text-align: center;
-    }
-
-    .forgot__password{
-        width: min-content;
-        white-space: nowrap;
-    }
-
-    .log__btn{
-        width: 120px;
-        height: 40px;
-        font-size: 20px;
-        margin: 0;
     }
 }

@@ -8,9 +8,6 @@ import Inner from '../../components/inner/Inner';
 import { format } from 'date-fns';
 import { getRelatedArticles, getArticlesPreview } from '../../api';
 
-// Кеш статей
-let articleCache = new Map();
-
 export default function BlogDetailPage() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -25,14 +22,8 @@ export default function BlogDetailPage() {
     }, [location]);
 
     useEffect(() => {
-        clearCache();
         handleFetchRelatedArticles();
     }, [blog]);
-
-    const clearCache = () => {
-        articleCache.clear();
-        console.log('Cache cleared');
-    };
 
     const handleFetchRelatedArticles = async () => {
         const fetchRelatedArticles = await getRelatedArticles(blog);
@@ -71,7 +62,7 @@ export default function BlogDetailPage() {
                             </div>
                             <div className='title'>{blog?.title}</div>
                             <div className='blog__details__date'>{format(new Date(blog?.createdAt), 'dd/MM/yyyy')} &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; {blog?.readTime} min read</div>
-                            {Array.isArray(blog?.tags) && blog.tags.length > 0 && (
+                            {blog.tags.length > 0 && (
                                 <div className='blog__tags__block'>
                                     {blog?.tags.map((tag, index) => (
                                         <div key={index} className='blog__tag'>{tag}</div>
@@ -89,7 +80,7 @@ export default function BlogDetailPage() {
                         </div>
                     </div>
                 </div>
-                {Array.isArray(relatedArticles) && relatedArticles.length > 0 ? (
+                {relatedArticles.length > 0 ? (
                     <div className='gray__background'>
                         <div className='container'>
                             <div className='related__posts__block'>

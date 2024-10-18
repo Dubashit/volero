@@ -68,6 +68,9 @@
 
 .item__text {
     width: 69%;
+    color: #68070D;
+    font-weight: 500;
+    font-size: 18px;
 }
 
 .reasons__item {
