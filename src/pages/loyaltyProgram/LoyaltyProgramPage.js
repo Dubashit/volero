@@ -11,7 +11,7 @@ export default function LoyaltyProgramPage() {
     const location = useLocation()
 
     useEffect(() => {
-        window.scrollTo(0, 0)
+        // window.scrollTo(0, 0)
         document.title = 'Volerò - Loyalty Program'
     }, [location])
 
@@ -58,6 +58,7 @@ export default function LoyaltyProgramPage() {
                                     <p>Create a Volero account and make your first hotel booking to start enjoying the loyalty program.</p>
                                 </div>
                             </div>
+                            <div className='item__line__1440'></div>
                             <div className='loyalty__content__item'>
                                 <div className='left'>
                                     <div className='img__background'>
@@ -69,6 +70,7 @@ export default function LoyaltyProgramPage() {
                                     <p>Receive points for your successful hotel booking activity. Exchange points for your own private trip.</p>
                                 </div>
                             </div>
+                            <div className='item__line__1440'></div>
                             <div className='loyalty__content__item'>
                                 <div className='left'>
                                     <div className='img__background'>
@@ -91,6 +93,7 @@ export default function LoyaltyProgramPage() {
                                     <p>Create a Volero account and make your first hotel booking to start enjoying the loyalty program.</p>
                                 </div>
                             </div>
+                            <div className='item__line__1024'></div>
                             <div className='loyalty__content__item__mobile'>
                                 <div className='left'>
                                     <div className='img__background'>
@@ -102,6 +105,7 @@ export default function LoyaltyProgramPage() {
                                     <p>Receive points for your successful hotel booking activity. Exchange points for your own private trip.</p>
                                 </div>
                             </div>
+                            <div className='item__line__1024'></div>
                             <div className='loyalty__content__item__mobile'>
                                 <div className='left'>
                                     <div className='img__background'>

@@ -73,8 +73,8 @@ button {
 
 .title {
     font-weight: 600;
-    font-size: 50px;
-    margin: 30px 0;
+    font-size: 34px;
+    line-height: 1.2;
 }
 
 .page__title {
@@ -91,7 +91,6 @@ button {
 .subtitle {
     font-weight: 600;
     font-size: 24px;
-    margin: 15px 0;
 }
 
 p,
@@ -105,7 +104,7 @@ a {
 
 .container {
     width: 100%;
-    max-width: 90%;
+    max-width: 80%;
     margin: 0 auto;
 }
 

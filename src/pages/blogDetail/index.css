@@ -5,8 +5,8 @@
     font-size: 30px;
 }
 
-.blog__date{
-    font-size: 20px;
+.blog__detail__content>.title{
+    margin: 20px 0;
 }
 
 .blog__info img{
@@ -25,11 +25,11 @@
 }
 
 .related__posts__block > .title{
-    margin-bottom: 60px;
+    margin: 20px 0 50px 0;
 }
 
 .blog__details__date{
-    font-size: 20px;
+    font-size: 18px;
     padding: 0 10px;
     margin-bottom: 30px;
     color: #888;

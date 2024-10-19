@@ -50,6 +50,8 @@ export default function ProductPage() {
                                         <p>Provide users access to more than 400K accommodation options globally.</p>
                                     </div>
                                 </div>
+                                <div className='item__line__1440'></div>
+                                <div className='item__line__950'></div>
                                 <div className='content__item'>
                                     <div className='left'>
                                         <div className='img__background'>
@@ -61,6 +63,7 @@ export default function ProductPage() {
                                         <p>Allows IATA & None IATA users to book through multiple Air  sources, including GDS, NDC, LCC, consolidators fares.</p>
                                     </div>
                                 </div>
+                                <div className='item__line__1440'></div>
                                 <div className='content__item'>
                                     <div className='left'>
                                         <div className='img__background'>
@@ -72,6 +75,7 @@ export default function ProductPage() {
                                         <p>Indulge family and seaside packages in European destinations.</p>
                                     </div>
                                 </div>
+                                <div className='item__line__950'></div>
                                 <div className='content__item'>
                                     <div className='left'>
                                         <div className='img__background'>
@@ -83,6 +87,7 @@ export default function ProductPage() {
                                         <p>Unbeatable offers from top car rental companies in 7k locations worldwide.</p>
                                     </div>
                                 </div>
+                                <div className='item__line__1440'></div>
                                 <div className='content__item'>
                                     <div className='left'>
                                         <div className='img__background'>
@@ -94,6 +99,8 @@ export default function ProductPage() {
                                         <p>Book Door to Door service, Private or shared rides, Budget or Luxury Vehicles, with professional drivers ready to pick up </p>
                                     </div>
                                 </div>
+                                <div className='item__line__950'></div>
+                                <div className='item__line__1440'></div>
                                 <div className='content__item'>
                                     <div className='left'>
                                         <div className='img__background'>

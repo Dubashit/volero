@@ -38,7 +38,7 @@ export default function HomePage() {
                         </div>
 
                         {/* <div className='devices'> */}
-                        <div className='phone__block'>
+                        {/* <div className='phone__block'>
                             <div className='phone__display'>
                                 <div className='phone__camera'>
                                     <div className='phone__block1'></div>
@@ -49,10 +49,10 @@ export default function HomePage() {
                             <div className='phone__button__mute'></div>
                             <div className='phone__button__volumeUp'></div>
                             <div className='phone__button__volumeDown'></div>
-                        </div>
+                        </div> */}
 
                         {/* це блок ноутбука */}
-                        <div className='laptop__block'>
+                        {/* <div className='laptop__block'>
                             <div className='first__monitor'>
                                 <div className='second__monitor'>
                                     <img className='monitor__header' src='/headerImage.jpg' alt='header' />
@@ -63,7 +63,7 @@ export default function HomePage() {
                                 <div className='laptop__left'></div>
                             </div>
                             <div className='laptop__footer'></div>
-                        </div>
+                        </div> */}
                         {/* </div> */}
                     </div>
                 </div>

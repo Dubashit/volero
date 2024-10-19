@@ -80,39 +80,36 @@ export default function BlogDetailPage() {
                         </div>
                     </div>
                 </div>
-                {relatedArticles.length > 0 ? (
-                    <div className='gray__background'>
-                        <div className='container'>
-                            <div className='related__posts__block'>
-                                <div className='title__block'>
-                                    <div className='title__line'></div>
-                                    <div className='title__text'>Other proposals</div>
-                                </div>
-                                <div className='title'>Related posts</div>
-                                <div className='related__posts__row'>
-                                    {relatedArticles.slice(0, 3).map((relatedArticle, index) => (
-                                        relatedArticle && (
-                                            <div
-                                                key={index}
-                                                onClick={() => navigate(`/blog/${relatedArticle?.id}`, { state: { blog: relatedArticle } })}
-                                                className='block__item'
-                                            >
-                                                {getArticlesPreview(relatedArticle)}
-                                                <div className='blog__head'>
-                                                    <div className='blog__date'>{format(new Date(relatedArticle.createdAt), 'dd/MM/yyyy')}</div>
-                                                </div>
-                                                <div className='blog__title'>
-                                                    <div>{relatedArticle.title}</div>
-                                                </div>
+                <div className='gray__background'>
+                    <div className='container'>
+                        <div className='related__posts__block'>
+                            <div className='title__block'>
+                                <div className='title__line'></div>
+                                <div className='title__text'>Other proposals</div>
+                            </div>
+                            <div className='title'>Related posts</div>
+                            <div className='related__posts__row'>
+                                {relatedArticles.slice(0, 3).map((relatedArticle, index) => (
+                                    relatedArticle && (
+                                        <div
+                                            key={index}
+                                            onClick={() => navigate(`/blog/${relatedArticle?.id}`, { state: { blog: relatedArticle } })}
+                                            className='block__item'
+                                        >
+                                            {getArticlesPreview(relatedArticle)}
+                                            <div className='blog__head'>
+                                                <div className='blog__date'>{format(new Date(relatedArticle.createdAt), 'dd/MM/yyyy')}</div>
                                             </div>
-                                        )
-                                    ))}
-                                </div>
+                                            <div className='blog__title'>
+                                                <div>{relatedArticle.title}</div>
+                                            </div>
+                                        </div>
+                                    )
+                                ))}
                             </div>
                         </div>
                     </div>
-                ) : null}
-
+                </div>
             </div>
             <Footer />
             <ScrollToTopButton />

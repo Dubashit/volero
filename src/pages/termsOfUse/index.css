@@ -9,7 +9,7 @@
 }
 
 .terms__list {
-    width: 22.22222%;
+    width: 25%;
     height: 300px;
     padding: 20px;
     background-color: #F3F5F9;
@@ -29,7 +29,7 @@
     position: fixed;
     width: 20%;
     top: 80px;
-    right: 5%;
+    right: 10%;
     scroll-behavior: smooth;
 }
 

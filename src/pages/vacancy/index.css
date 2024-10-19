@@ -1,8 +1,12 @@
 .vacan__details{
-    font-size: 20px;
+    font-size: 18px;
     padding: 0 10px;
     margin-bottom: 30px;
     color: #888;
+}
+
+.vacancy__first__block>.title{
+    margin: 20px 0;
 }
 
 .vacancy__third__block{
@@ -12,6 +16,10 @@
 
 .third__block__content{
     width: 35%;
+}
+
+.third__block__content>.title{
+    margin: 20px 0 30px 0;
 }
 
 .vacancy__form{
@@ -56,9 +64,8 @@
 }
 
 .form__btn{
-    width: 200px;
-    height: 60px;
-    font-size: 30px;
+    padding: 10px 50px 14px 50px;
+    font-size: 24px;
     cursor: pointer;
     text-align: center;
     border-radius: 15px;

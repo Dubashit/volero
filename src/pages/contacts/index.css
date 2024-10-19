@@ -21,13 +21,16 @@
 
 .contact__content{
     text-align: center;
-    margin-top: 100px;
 }
 
 .contact__second__block{
-    margin: 70px 0;
+    margin: 90px 0;
     text-align: center;
     align-content: center;
+}
+
+.contact__second__block>.title{
+    margin: 20px 0;
 }
 
 .contact__second__block a{
@@ -36,7 +39,7 @@
 
 .contact__second__block p{
     margin: 0;
-    line-height: 2;
+    line-height: 1.7;
 }
 
 .small__title{
@@ -45,10 +48,8 @@
     margin: 20px 0 30px 0;
 }
 
-.contact__trird__block{
-    width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;
+.contact__trird__block>.title{
+    margin-bottom: 50px;
 }
 
 .contact__content__second{

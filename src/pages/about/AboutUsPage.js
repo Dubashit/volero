@@ -92,30 +92,37 @@ export default function AboutUsPage() {
                                     </div>
                                     <div className='item__text'>Top notch 24/7 multilingual call center</div>
                                 </div>
+                                <div className='item__line__1440'></div>
+                                <div className='item__line__950'></div>
                                 <div className='reasons__item'>
                                     <div className='img__background'>
                                         <img src='item2.png' alt='img' />
                                     </div>
                                     <div className='item__text'>No transaction fees</div>
                                 </div>
+                                <div className='item__line__1440'></div>
                                 <div className='reasons__item'>
                                     <div className='img__background'>
                                         <img src='item3.png' alt='img' />
                                     </div>
                                     <div className='item__text'>Best offers in real time availability</div>
                                 </div>
+                                <div className='item__line__950'></div>
                                 <div className='reasons__item'>
                                     <div className='img__background'>
                                         <img src='item4.png' alt='img' />
                                     </div>
                                     <div className='item__text'>Constant optimization</div>
                                 </div>
+                                <div className='item__line__1440'></div>
                                 <div className='reasons__item'>
                                     <div className='img__background'>
                                         <img src='item5.png' alt='img' />
                                     </div>
                                     <div className='item__text'>Account management</div>
                                 </div>
+                                <div className='item__line__1440'></div>
+                                <div className='item__line__950'></div>
                                 <div className='reasons__item'>
                                     <div className='img__background'>
                                         <img src='item6.png' alt='img' />
@@ -128,12 +135,15 @@ export default function AboutUsPage() {
                                     </div>
                                     <div className='item__text'>Data protection</div>
                                 </div>
+                                <div className='item__line__1440'></div>
+                                <div className='item__line__950'></div>
                                 <div className='reasons__item'>
                                     <div className='img__background'>
                                         <img src='item8.png' alt='img' />
                                     </div>
                                     <div className='item__text'>Payment solutions</div>
                                 </div>
+                                <div className='item__line__1440'></div>
                                 <div className='reasons__item'>
                                     <div className='img__background'>
                                         <img src='item9.png' alt='img' />
@@ -141,7 +151,7 @@ export default function AboutUsPage() {
                                     <div className='item__text'>Personal touch</div>
                                 </div>
                             </div>
-                            <div className='request__join'>
+                            <div className='wraper1'>
                                 <div className='subtitle'>Ready to transform your business?</div>
                                 <button className='about__btn__register' onClick={() => navigate('/register')}>Join us</button>
                             </div>

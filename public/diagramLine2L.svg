@@ -1,17 +1,17 @@
-<svg width="1300" height="120" xmlns="http://www.w3.org/2000/svg">
+<svg width="1300" height="60" xmlns="http://www.w3.org/2000/svg">
   <!-- Horizontal line -->
-  <line x1="120" y1="50" x2="1180" y2="50" stroke="#800000" stroke-width="2" />
+  <line x1="120" y1="30" x2="1180" y2="30" stroke="#800000" stroke-width="2" />
 
   
-  <line x1="120" y1="50" x2="120" y2="100" stroke="#800000" stroke-width="2" />
-  <line x1="385" y1="50" x2="385" y2="100" stroke="#800000" stroke-width="2" />
-  <line x1="650" y1="0" x2="650" y2="100" stroke="#800000" stroke-width="2" />
-  <line x1="915" y1="50" x2="915" y2="100" stroke="#800000" stroke-width="2" />
-  <line x1="1180" y1="50" x2="1180" y2="100" stroke="#800000" stroke-width="2" />
+  <line x1="120" y1="30" x2="120" y2="50" stroke="#800000" stroke-width="2" />
+  <line x1="385" y1="30" x2="385" y2="50" stroke="#800000" stroke-width="2" />
+  <line x1="650" y1="0" x2="650" y2="50" stroke="#800000" stroke-width="2" />
+  <line x1="915" y1="30" x2="915" y2="50" stroke="#800000" stroke-width="2" />
+  <line x1="1180" y1="30" x2="1180" y2="50" stroke="#800000" stroke-width="2" />
 
-  <circle cx="120" cy="100" r="3" fill="#800000" />
-  <circle cx="385" cy="100" r="3" fill="#800000" />
-  <circle cx="650" cy="100" r="3" fill="#800000" />
-  <circle cx="915" cy="100" r="3" fill="#800000" />
-  <circle cx="1180" cy="100" r="3" fill="#800000" />
+  <circle cx="120" cy="50" r="3" fill="#800000" />
+  <circle cx="385" cy="50" r="3" fill="#800000" />
+  <circle cx="650" cy="50" r="3" fill="#800000" />
+  <circle cx="915" cy="50" r="3" fill="#800000" />
+  <circle cx="1180" cy="50" r="3" fill="#800000" />
 </svg>

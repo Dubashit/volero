@@ -43,11 +43,14 @@ export default function BlogPage() {
 
     const handleFetchTags = async () => {
         const fetchedTags = await getTags();
+        console.log(fetchedTags);
+        
         setTags(fetchedTags);
     };
 
     const handleFetchArticles = async () => {
         const fetchArticles = await getBlogs();
+        console.log(fetchArticles);
         setBlogs(fetchArticles);
         setFilteredBlogs(fetchArticles);
     }
@@ -97,7 +100,7 @@ export default function BlogPage() {
                                 <p>Discover tips, guides, and other helpful content for travel companies. Use the filter below to find blog posts on a topic that interests you.</p>
                             </div>
                             <div className='blog__tags__block'>
-                                {tags.map(tag => (
+                                {Array.isArray(tags) ? tags?.map(tag => (
                                     <div
                                         key={tag.id}
                                         className={`blog__tag ${activeTags.includes(tag.id) ? 'active' : ''}`}
@@ -106,15 +109,15 @@ export default function BlogPage() {
                                         {tag.title}
                                         {activeTags.includes(tag.id) && <span className="cross">✖</span>}
                                     </div>
-                                ))}
+                                )) : null}
                             </div>
-                            {activeTags.length > 0 && (
+                            {activeTags?.length > 0 && (
                                 <div className='blog__count__block'>
                                     <div>{`Found ${filteredBlogs.length} blog(s) for selected tag(s)`}</div>
                                 </div>
                             )}
                             <div className='blog__row'>
-                                {currentBlogs.map(blog => (
+                                {Array.isArray(currentBlogs) ? currentBlogs?.map(blog => (
                                     <div onClick={() => navigate(`/blog/${blog.id}`, { state: { blog } })} className='block__item'>
                                         {getArticlesPreview(blog)}
                                         <div className='blog__head'>
@@ -124,7 +127,7 @@ export default function BlogPage() {
                                             <div>{blog.title}</div>
                                         </div>
                                     </div>
-                                ))}
+                                )) : null}
                             </div>
 
                             <Pagination

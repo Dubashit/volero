@@ -9,7 +9,7 @@
 }
 
 .privacy__list {
-    width: 22.222222%;
+    width: 20%;
     height: min-content;
     padding: 20px;
     border-radius: 20px;
@@ -25,9 +25,9 @@
 
 .privacy__list.fixed {
     position: fixed;
-    width: 20%;
     top: 80px;
-    right: 5%;
+    right: 10%;
+    width: 16%;
 }
 
 @media(max-width:768px){

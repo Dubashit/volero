@@ -11,7 +11,7 @@
     height: 400px;
     border-radius: 20px;
     overflow: hidden;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .card__image {
@@ -31,7 +31,7 @@
     opacity: 0;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: space-between;
     padding: 20px;
     color: white;
     transition: .5s ease;
@@ -62,6 +62,15 @@
 .card:hover .card__overlay {
     transition: .5s ease;
     opacity: 1;
+}
+
+.linkedin__icon{
+    width: 20px;
+    height: 20px;
+}
+
+.link{
+    width: 20px;
 }
 
 @media(max-width:768px){

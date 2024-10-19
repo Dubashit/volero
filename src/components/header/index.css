@@ -9,7 +9,7 @@ header {
 }
 
 header>div {
-    width: 90%;
+    width: 80%;
     margin: 5px auto;
     display: flex;
     justify-content: space-between;

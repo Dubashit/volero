@@ -13,6 +13,8 @@ export const getTags = async () => {
 export const getBlogs = async () => {
     try {
         const response = await axios.get(`${API_URL}/articles/search?status=active`);
+        console.log(API_URL);
+        
         return response.data
     } catch (error) {
         console.error(error);

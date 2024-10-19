@@ -50,11 +50,9 @@
 
 .log__btn {
     text-align: center;
-    width: 200px;
-    height: 60px;
-    font-size: 30px;
+    padding: 10px 50px 14px 50px;
+    font-size: 22px;
     cursor: pointer;
-    padding: 0 10px;
     border-radius: 15px;
     border: 2px, solid, #68070D;
     background-color: #68070D;
@@ -89,13 +87,6 @@
 .forgot__password{
     width: min-content;
     white-space: nowrap;
-}
-
-.log__btn{
-    width: 120px;
-    height: 40px;
-    font-size: 20px;
-    margin: 0;
 }
 
 @media(max-width:768px){
