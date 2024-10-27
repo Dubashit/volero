@@ -24,7 +24,7 @@ export default function Diagram() {
             </div>
             <img className='first__line__largeScreen' src='/diagramLine1L.svg' alt='arrow' />
             <img className='first__line__mediumScreen' src='/diagramLine1M.svg' alt='arrow' />
-            <div className='diagram__logo'><img src='/logoWhite.png' alt='logo' /></div>
+            <div className='diagram__logo'><img src='/logoWhite.webp' alt='logo' /></div>
             <img className='second__line__largeScreen' src='/diagramLine2L.svg' alt='arrow' />
             <div className='diagram__line'></div>
             <div className='client__block'>

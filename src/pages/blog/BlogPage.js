@@ -8,6 +8,19 @@ import { format } from 'date-fns';
 import { getArticlesPreview, getBlogs, getTags } from '../../api';
 
 export default function BlogPage() {
+
+    useEffect(() => {
+        const link = document.createElement('link');
+        link.rel = 'preconnect';
+        link.href = `${process.env.REACT_APP_API_URL}`;
+
+        document.head.appendChild(link);
+
+        return () => {
+            document.head.removeChild(link);
+        };
+    }, []);
+
     const location = useLocation();
     const navigate = useNavigate()
 
@@ -118,7 +131,7 @@ export default function BlogPage() {
                             )}
                             <div className='blog__row'>
                                 {Array.isArray(currentBlogs) ? currentBlogs?.map(blog => (
-                                    <div onClick={() => navigate(`/blog/${blog.id}`, { state: { blog } })} className='block__item'>
+                                    <div onClick={() => navigate(`/blog/${blog.id}`, { state: { blog } })} className='block__item' key={blog.id}>
                                         {getArticlesPreview(blog)}
                                         <div className='blog__head'>
                                             <div className='blog__date'>{format(new Date(blog?.createdAt), 'dd/MM/yyyy')}</div>

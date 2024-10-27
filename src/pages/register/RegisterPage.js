@@ -7,6 +7,19 @@ import PhoneNumberInput from '../../components/phoneNumberInput/PhoneNumberInput
 import { postRequestRegister } from '../../api';
 
 export default function RegisterPage() {
+
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = `${process.env.REACT_APP_API_URL}`;
+
+    document.head.appendChild(link);
+
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
   const location = useLocation();
 
   useEffect(() => {
@@ -37,13 +50,13 @@ export default function RegisterPage() {
   const handleContinueClick = async (event) => {
     event.preventDefault();
     if (formType === 'personal') {
-      if(!firstName || !lastName || !email || !phone || !countryCode){
+      if (!firstName || !lastName || !email || !phone || !countryCode) {
         alert('Please enter all required fields')
       }
       setIsPersonalFormSubmitted(true);
       setFormType('company');
     } else if (formType === 'company') {
-      if(!companyName || !companyType || !roleInCompany || !country || !source || !reason){
+      if (!companyName || !companyType || !roleInCompany || !country || !source || !reason) {
         alert('Please enter all required fields')
       }
       const formData = new FormData()

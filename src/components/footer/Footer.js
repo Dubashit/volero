@@ -11,14 +11,14 @@ export default function Footer() {
             <div className='container'>
                 <div className='footer__content'>
                     <div className='footer__first__block'>
-                        <img onClick={() => { navigate('/') }} className='logo' src={`${process.env.PUBLIC_URL}/logoRed.png`} alt='logo' />
-                        <p>We focus on the needs of middle to big market business to improve and grow their return</p>
+                        <img onClick={() => { navigate('/') }} className='logo' src={'/logoRed.webp'} alt='logo' />
+                        <p>We specialize in meeting the needs of SME’s businesses, helping them to drive growth for a better return on investment. Let us partner with you to unlock your business's full potential!</p>
                         <div className='messengers'>
-                            <a href='#' target='_blanc'>
-                                <img src='/inst.png' alt='instagram' />
+                            <a href='https://www.instagram.com/volero_tourism?igsh=NnJuZm5vcjliZzVl&utm_source=qr' target='_blanc'>
+                                <img src='/inst.webp' alt='instagram' />
                             </a>
                             <a href='https://www.linkedin.com/company/volero-tourism/?viewAsMember=true' target='_blanc'>
-                                <img src='/linkin.png' alt='linkedin' />
+                                <img src='/linkin.webp' alt='linkedin' />
                             </a>
                         </div>
                     </div>
@@ -39,13 +39,13 @@ export default function Footer() {
                         </div>
                         <div className='fourth'>
                             <p className='title'>Address</p>
-                            <p>281 Hayuvalim street, Beerotayim, Israel</p>
+                            <p>281 Hayuvalim street, Beerotayim, Israel, 4285000</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div className='copyright'>
-                &copy; 2024 <img className='logo__copyright' src='/logoWhite.png' alt='logo' /> , Inc. All rights reserved.
+                &copy; 2024 <img className='logo__copyright' src='/logoWhite.webp' alt='logo' /> , Inc. All rights reserved.
             </div>
         </footer>
     )

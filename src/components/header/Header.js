@@ -20,16 +20,23 @@ export default function Header() {
     return (
         <header>
             <div>
-                <img onClick={() => { navigate('/') }} className='logo' src='/logoRed.png' alt='logo' draggable='false' />
+                <img onClick={() => { navigate('/') }} className='logo' src='/logoRed.webp' alt='logo' draggable='false' />
                 <div className={`nav ${isMenuOpen ? 'open' : ''}`}>
                     <div onClick={() => { navigate('/about'); setMenuOpen(false) }} className={isActive('/about')}>About us</div>
                     <div onClick={() => { navigate('/product'); setMenuOpen(false) }} className={isActive('/product')}>Product</div>
                     <div onClick={() => { navigate('/loyaltyProgram'); setMenuOpen(false) }} className={isActive('/loyaltyProgram')}>Loyalty program</div>
                     <div onClick={() => { navigate('/blog'); setMenuOpen(false) }} className={isActive('/blog')}>Blog</div>
                     <div onClick={() => { navigate('/contacts'); setMenuOpen(false) }} className={isActive('/contacts')}>Contact us</div>
-                    <button onClick={() => { navigate('/login'); setMenuOpen(false) }} className={isActiveBtn('/login')}>Log in</button>
-                    {/* <a href='https://www.volero.net/reseller/auth/' className={isActiveBtn('/login')}>Log in</a> */}
-                    <button onClick={() => { navigate('/register') }} className={isActiveBtn('/register')}>Join us</button>
+                    {location.pathname !== '/loyalty' && (
+                        <div className='btns__block'>
+                            <button onClick={() => { navigate('/login?source=main'); setMenuOpen(false) }} className={isActiveBtn('/login')}>Log in</button>
+                            {/* <a href='https://www.volero.net/reseller/auth/' className={isActiveBtn('/login')}>Log in</a> */}
+                            <button onClick={() => { navigate('/register') }} className={isActiveBtn('/register')}>Join us</button>
+                        </div>
+                    )}
+                    {location.pathname === '/loyalty' && (
+                        <button onClick={() => { navigate('/') }} className='header__btn__login'>Log out</button>
+                    )}
                 </div>
                 <div className={`burger ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
                     <span className='first__span'></span>

@@ -1,5 +1,5 @@
 .home {
-    background-image: url('/public/homeBackground.jpg');
+    background-image: url('/public/homeBackground.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -8,15 +8,24 @@
     top: 0;
 }
 
+.home__title__block>ul>li{
+    color: #000;
+}
+
+.home__title__block>ul{
+    margin: 0;
+}
+
 .home__first__block {
     width: 80%;
+    height: 100%;
     margin: 0 auto;
-    padding-top: 120px;
     text-align: center;
+    align-content: center;
 }
 
 .home__first__block>.title{
-    margin: 30px 0;
+    margin-bottom: 30px;
 }
 
 .slogan__text {
@@ -30,8 +39,8 @@
     margin-left: 10%;
     color: #68070D;
     overflow-x: hidden;
-    /* height: 550px; */
     overflow: hidden;
+    align-items: center;
 }
 
 .home__title__block{
@@ -42,168 +51,15 @@
     color: #000;
 }
 
-.laptop__block {
-    height: 510px;
-    width: 600px;
-    position: relative;
-    right: -200px;
-    margin-bottom: 50px;
+.home__laptop{
+    width: 60%;
 }
 
-.first__monitor {
-    height: 500px;
-    width: 100%;
-    background-color: #959190;
-    border-radius: 20px;
-    padding: 7px;
-}
-
-.second__monitor {
-    height: 100%;
-    width: 100%;
-    background-color: #000;
-    border-radius: 20px;
-    box-sizing: border-box;
-    padding: 7px 0 30px 7px;
-}
-
-.monitor__header {
-    height: 70px;
-    border-radius: 20px 0 0 0;
-}
-
-.monitor__body {
-    position: relative;
-    top: -5px;
-    height: 390px;
-    width: 700px;
-    border-radius: 0 0 0 20px;
-}
-
-.laptop__corpus {
-    position: relative;
-    left: -130px;
-    width: 1000px;
-    height: 30px;
-    background-color: #7e7b7b;
-}
-
-.laptop__left {
-    width: 1000px;
-    height: 100%;
-    background: linear-gradient(to right, #101010 0px, #3e3c3c 20px, transparent 40px);
-}
-
-.laptop__footer {
-    position: relative;
-    left: -130px;
-    width: 200%;
-    height: 10px;
-    border-radius: 0 80%;
-    background-color: #292828;
-}
-
-
-
-
-
-.phone__block{
-    position: absolute;
-    top: 800px;
-    right: 380px;
-    width: 270px;
-    height: 480px;
-    border-radius: 40px;
-    background-color: #d6d3d3;
-    z-index: 9;
-    padding: 3px;
-    box-sizing: border-box;
-}
-
-.phone__display{
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    border-radius: 40px;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-.phone__display>img{
-    width: 100%;
-    height: 100%;
-    border-radius: 30px;
+.home__laptop>img{
+    width: 90%;
     object-fit: cover;
+    margin-left: 50px;
 }
-
-.phone__camera{
-    position: absolute;
-    top: 10;
-    right: 68px;
-    width: 50%;
-    height: 20px;
-    margin: 0 auto;
-    border-radius: 0 0 15px 15px;
-    background-color: black;
-}
-
-.phone__block1{
-    position: absolute;
-    top: 3px;
-    right: 41px;
-    width: 40%;
-    height: 5px;
-    background-color: #8b8b8b;
-    border-radius: 2px;
-}
-
-.phone__block2{
-    position: absolute;
-    top: 3px;
-    right: 30px;
-    width: 5px;
-    height: 5px;
-    background-color: #8b8b8b;
-    border-radius: 2.5px;
-}
-
-.phone__button__mute{
-    position: absolute;
-    top: 70px;
-    left: -3px;
-    width: 3px;
-    height: 25px;
-    border-radius: 10px 0 0 10px;
-    background-color: #b9b9b9;
-}
-
-.phone__button__volumeUp{
-    position: absolute;
-    top: 110px;
-    left: -3px;
-    width: 3px;
-    height: 35px;
-    border-radius: 10px 0 0 10px;
-    background-color: #b9b9b9;
-}
-
-.phone__button__volumeDown{
-    position: absolute;
-    top: 150px;
-    left: -3px;
-    width: 3px;
-    height: 35px;
-    border-radius: 10px 0 0 10px;
-    background-color: #b9b9b9;
-}
-
-.devices{
-    overflow: hidden;
-}
-
-
-
-
 
 .home__third__block{
     width: 80%;
@@ -250,32 +106,9 @@
     margin-top: 50px;
 }
 
-
-
 @media(max-width:1225px) {
-    .laptop__block {
-        right: -300px;
-    }
-
-    .phone__block{
-        right: 280px;
-    }
-
     .home__title__block{
         width: 40%;
-    }
-}
-
-@media(max-width:1024px) {
-    .laptop__block {
-        right: -300px;
-    }
-    .laptop__block {
-        right: -400px;
-    }
-
-    .phone__block{
-        right: 180px;
     }
 }
 
@@ -283,39 +116,6 @@
     .slogan__text {
         font-size: 20px;
         margin-bottom: 30px;
-    }
-
-    .laptop__block {
-        right: -400px;
-    }
-
-    .phone__block{
-        top: 850px;
-        right: 180px;
-        width: 220px;
-        height: 400px;
-    }
-    
-    .phone__camera{
-        right: 55px;
-    }
-    
-    .phone__button__mute{
-        position: absolute;
-        top: 60px;
-        left: -3px;
-        width: 3px;
-        height: 25px;
-        border-radius: 10px 0 0 10px;
-        background-color: #b9b9b9;
-    }
-    
-    .phone__button__volumeUp{
-        top: 100px;
-    }
-    
-    .phone__button__volumeDown{
-        top: 140px;
     }
 }
 
@@ -326,30 +126,11 @@
 
     .home__second__block{
         flex-direction: column;
+        height: auto;
     }
 
     .home__title__block{
         width: 100%;
-    }
-
-    .devices{
-        height: 600px;
-    }
-
-    .laptop__block {
-        position: relative;
-        top: -360px;
-        right: -300px;
-    }
-
-    .phone__block{
-        position: relative;
-        top: 140px;
-        right: -100px;
-    }
-
-    .home__second__block{
-        height: auto;
     }
 
     .home__content{
@@ -383,10 +164,6 @@
 }
 
 @media(max-width:425px) {
-    .laptop__block{
-        right: -300px;
-    }
-
     .home__content__item>img{
         width: 100%;
         height: 200px;
@@ -398,19 +175,6 @@
 }
 
 @media(max-width:376px) {
-    .devices{
-        display: none;
-    }
-
-    .phone__block{
-        top: 0;
-        left: 50px;
-    }
-
-    .laptop__block{
-        display: none;
-    }
-
     .home__second__block{
         height: auto;
     }

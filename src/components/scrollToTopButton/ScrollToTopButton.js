@@ -30,7 +30,7 @@ const ScrollToTopButton = () => {
         <div className="scroll__to__top">
             {isVisible && (
                 <button onClick={scrollToTop} className="scroll__button">
-                    <img src='/arrow.png' alt='arrow' draggable='false'/>
+                    <img src='/arrow.webp' alt='arrow' draggable='false'/>
                 </button>
             )}
         </div>

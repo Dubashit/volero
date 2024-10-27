@@ -4,6 +4,7 @@ import Footer from '../../components/footer/Footer'
 import './index.css'
 import ScrollToTopButton from '../../components/scrollToTopButton/ScrollToTopButton'
 import { useLocation, useNavigate } from 'react-router-dom'
+import FeedBack from '../../components/feedBack/FeedBack'
 
 export default function LoyaltyProgramPage() {
 
@@ -11,7 +12,7 @@ export default function LoyaltyProgramPage() {
     const location = useLocation()
 
     useEffect(() => {
-        // window.scrollTo(0, 0)
+        window.scrollTo(0, 0)
         document.title = 'Volerò - Loyalty Program'
     }, [location])
 
@@ -31,15 +32,17 @@ export default function LoyaltyProgramPage() {
                             <div className='loyalty__content'>
                                 <div className='title'>Welcome to our Volero Loyalty Program</div>
                                 <p>Our rewards program is designed exclusively for bookers to earn points with each hotel
-                                    booking and redeem them for exciting travel products based on their performance. </p>
+                                    booking and redeem them for exciting travel products based on their performance.
+                                    The more you book, the more you earn!</p>
                                 <button className='about__btn__register loyalty__btn' onClick={() => navigate('/register')}>Join Us</button>
-                                <div className='loyalty__navigate'>Already a member of loyalty program?<br /><div onClick={() => navigate('/login')}><u>Log in to your member account</u></div></div>
+                                {/* <div className='loyalty__navigate'>Already a member of loyalty program?<br /><div onClick={() => navigate('/login')}><u>Log in to your member account</u></div></div> */}
+                                <p>Existing bookers can fill in their personal credentials on the Loyalty Program <span onClick={() => navigate('/login?source=loyalty')}>Login page</span> to track their points.</p>
                             </div>
                             <div className='images'>
-                                <img src='aboutFirstBlock1.jpg' alt='iam' />
-                                <img src='aboutFirstBlock3.jpg' alt='iam' />
-                                <img src='aboutFirstBlock2.jpg' alt='iam' />
-                                <img src='aboutFirstBlock4.jpg' alt='iam' />
+                                <img src='/loyalty1.webp' alt='iam' />
+                                <img src='/loyalty2.webp' alt='iam' />
+                                <img src='/loyalty3.webp' alt='iam' />
+                                <img src='/loyalty4.webp' alt='iam' />
                             </div>
                         </div>
                     </div>
@@ -50,7 +53,7 @@ export default function LoyaltyProgramPage() {
                             <div className='loyalty__content__item'>
                                 <div className='left'>
                                     <div className='img__background'>
-                                        <img src='join.jpg' alt='img' />
+                                        <img src='/join.webp' alt='img' />
                                     </div>
                                 </div>
                                 <div className='right'>
@@ -62,7 +65,7 @@ export default function LoyaltyProgramPage() {
                             <div className='loyalty__content__item'>
                                 <div className='left'>
                                     <div className='img__background'>
-                                        <img src='earn.jpg' alt='img' />
+                                        <img src='/earn.webp' alt='img' />
                                     </div>
                                 </div>
                                 <div className='right'>
@@ -74,18 +77,18 @@ export default function LoyaltyProgramPage() {
                             <div className='loyalty__content__item'>
                                 <div className='left'>
                                     <div className='img__background'>
-                                        <img className='air__image' src='air.jpg' alt='img' />
+                                        <img className='air__image' src='/air.webp' alt='img' />
                                     </div>
                                 </div>
                                 <div className='right'>
                                     <div className='subtitle'>Redeem</div>
-                                    <p>Pay for bookings with points and reduce your travel expenses or make discounts to your customers.</p>
+                                    <p>Pay for bookings with points and reduce your travel expenses.</p>
                                 </div>
                             </div>
                             <div className='loyalty__content__item__mobile'>
                                 <div className='left'>
                                     <div className='img__background'>
-                                        <img src='join.jpg' alt='img' />
+                                        <img src='/join.webp' alt='img' />
                                     </div>
                                     <div className='subtitle'>Join</div>
                                 </div>
@@ -97,7 +100,7 @@ export default function LoyaltyProgramPage() {
                             <div className='loyalty__content__item__mobile'>
                                 <div className='left'>
                                     <div className='img__background'>
-                                        <img src='earn.jpg' alt='img' />
+                                        <img src='/earn.webp' alt='img' />
                                     </div>
                                     <div className='subtitle'>Earn</div>
                                 </div>
@@ -109,7 +112,7 @@ export default function LoyaltyProgramPage() {
                             <div className='loyalty__content__item__mobile'>
                                 <div className='left'>
                                     <div className='img__background'>
-                                        <img className='air__image' src='air.jpg' alt='img' />
+                                        <img className='air__image' src='/air.webp' alt='img' />
                                     </div>
                                     <div className='subtitle'>Redeem</div>
                                 </div>
@@ -117,6 +120,25 @@ export default function LoyaltyProgramPage() {
                                     <p>Pay for bookings with points and reduce your travel expenses or make discounts to your customers.</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='gray__background'>
+                    <div className='container'>
+                        <div className='product__fiveth__block'>
+                            <div className='title__block'>
+                                <div className='title__line'></div>
+                                <div className='title__text'>Our testimonials</div>
+                            </div>
+                            <div className='feedback__title'>
+                                <div className='title'>Trusted by 10k+ customers</div>
+                                <p>Whether you're a small startup or a multinational corporation, let us be your trusted advisor on the path to success.</p>
+                            </div>
+                        </div>
+                        <FeedBack />
+                        <div className='wraper1'>
+                            <div className='subtitle'>Ready to transform your business?</div>
+                            <button className='about__btn__register' onClick={() => navigate('/register')}>Join us</button>
                         </div>
                     </div>
                 </div>

@@ -7,6 +7,19 @@ import './index.css'
 import { getVacancies } from '../../api';
 
 export default function CareerPage() {
+
+    useEffect(() => {
+        const link = document.createElement('link');
+        link.rel = 'preconnect';
+        link.href = `${process.env.REACT_APP_API_URL}`;
+
+        document.head.appendChild(link);
+
+        return () => {
+            document.head.removeChild(link);
+        };
+    }, []);
+
     const location = useLocation();
     const navigate = useNavigate()
     const [vacancies, setVacancies] = useState([])
@@ -36,13 +49,13 @@ export default function CareerPage() {
                                 </div>
                                 <div className='title'>Join our team</div>
                                 <p>We’re a team of hard-working professionals driven by the passion for technology and travel. Trust,
-                                    honesty, innovation, and collaboration are the main values that flow through everything we do</p>
+                                    honesty, innovation, and collaboration are the main values that flow through everything we do.</p>
                             </div>
                             <div className='images'>
-                                <img className='image' src='aboutFirstBlock1.jpg' alt='iam' />
-                                <img className='image' src='aboutFirstBlock3.jpg' alt='iam' />
-                                <img className='image' src='aboutFirstBlock2.jpg' alt='iam' />
-                                <img className='image' src='aboutFirstBlock4.jpg' alt='iam' />
+                                <img className='image' src='/aboutFirstBlock1.webp' alt='iam' />
+                                <img className='image' src='/aboutFirstBlock3.webp' alt='iam' />
+                                <img className='image' src='/aboutFirstBlock2.webp' alt='iam' />
+                                <img className='image' src='/aboutFirstBlock4.webp' alt='iam' />
                             </div>
                         </div>
                     </div>
@@ -53,7 +66,7 @@ export default function CareerPage() {
                             <div className='title'>Open positions</div>
                             <p>If our company resonates with you, join our talented team to skyrocket your career</p>
                             {vacancies.map(vacancy => (
-                                <div className='vacancy__block'>
+                                <div className='vacancy__block' key={vacancy.id}>
                                     <div className='vacancy__content'>
                                         <div className='vacancy__title'>{vacancy.title}</div>
                                         <div className='vacancy__details'>{vacancy.location} &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; {vacancy.employmentType}</div>

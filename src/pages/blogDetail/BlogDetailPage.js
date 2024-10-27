@@ -9,6 +9,19 @@ import { format } from 'date-fns';
 import { getRelatedArticles, getArticlesPreview } from '../../api';
 
 export default function BlogDetailPage() {
+
+    useEffect(() => {
+        const link = document.createElement('link');
+        link.rel = 'preconnect';
+        link.href = `${process.env.REACT_APP_API_URL}`;
+
+        document.head.appendChild(link);
+
+        return () => {
+            document.head.removeChild(link);
+        };
+    }, []);
+
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -89,7 +102,7 @@ export default function BlogDetailPage() {
                             </div>
                             <div className='title'>Related posts</div>
                             <div className='related__posts__row'>
-                                {relatedArticles.slice(0, 3).map((relatedArticle, index) => (
+                                {Array.isArray(relatedArticles) && relatedArticles.slice(0, 3).map((relatedArticle, index) => (
                                     relatedArticle && (
                                         <div
                                             key={index}

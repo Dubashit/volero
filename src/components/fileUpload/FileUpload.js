@@ -63,7 +63,7 @@ export default function FileUpload({ onFileSelect }) {
             {file ? (
                 <div className="file-preview">
                     <div className="file-info">
-                        <img src='/pdf.png' alt="File icon" className="file-icon" />
+                        <img src='/pdf.webp' alt="File icon" className="file-icon" />
                         <div className="file-details">
                             <div className="file-name">{file.name}</div>
                             <div className="file-size">

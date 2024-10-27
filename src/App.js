@@ -14,6 +14,7 @@ import VacancyPage from "./pages/vacancy/VacancyPage";
 import './index.css';
 import PrivacyPage from "./pages/privacy/PrivacyPage";
 import TermsOfUsePage from "./pages/termsOfUse/TermsOfUsePage";
+import PointsPage from "./pages/points/PointsPage";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/career/vacancy/:id" element={<VacancyPage />} />
         <Route path="/privacyPolicy" element={<PrivacyPage />} />
         <Route path="/termsOfUse" element={<TermsOfUsePage />} />
+        <Route path="/loyalty" element={<PointsPage />} />
       </Routes>
     </Router>
   );

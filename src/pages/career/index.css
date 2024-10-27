@@ -4,7 +4,7 @@
 }
 
 .career__content{
-    width: 600px;
+    width: 40%;
 }
 
 .career__content>.title{
@@ -121,11 +121,6 @@
 
     .vacancy__title{
         font-size: 22px;
-    }
-
-    .vacancy__btn{
-        padding: 10px 20px;
-        font-size: 18px;
     }
 
     .vacancy__details{

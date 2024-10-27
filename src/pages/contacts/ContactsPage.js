@@ -31,14 +31,13 @@ export default function ContactsPage() {
                                 <div className='title__line'></div>
                                 <div className='title__text'>Contact Us</div>
                             </div>
-                            <div className='title'>How to reach us</div>
                             <div className='small__title'>Working hours:</div>
                             <p>Sunday - Friday 09:00-18:00<br />
-                                Tel: +972-774711315/+44-2037696319<br />
+                                Tel: +972-774711315/+44-1224076189<br />
                                 Customer support email: <a href='mailto:support@volero.net'>support@volero.net</a></p>
                             <div>--------------------------------------------</div>
                             <div className='small__title'>After working hours (7 days a week):</div>
-                            <p>Tel: +972-774711315/+44-2037696319<br />
+                            <p>Tel: +972-774711315/+44-1224076189<br />
                                 Email: <a href='mailto:support@volero.net'>support@volero.net</a><br />
                                 Emergency line: <a href='mailto:emergency@volero.net'>emergency@volero.net</a></p>
                         </div>
@@ -51,7 +50,7 @@ export default function ContactsPage() {
                                     <div className='contact__item'>
                                         <div className='subtitle'>Customer Support</div>
                                         <p>Tel: +972-774711315 (*1)<br />
-                                            Mail: <a href='mailto:CS@volero.net'>CS@volero.net</a></p>
+                                            Mail: <a href='mailto:support@volero.net'>support@volero.net</a></p>
                                     </div>
                                     <div className='item__line'></div>
                                     <div className='contact__item'>

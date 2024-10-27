@@ -14,7 +14,7 @@ export const getBlogs = async () => {
     try {
         const response = await axios.get(`${API_URL}/articles/search?status=active`);
         console.log(API_URL);
-        
+
         return response.data
     } catch (error) {
         console.error(error);
@@ -47,7 +47,11 @@ export const getRelatedArticles = async (item) => {
 };
 
 export const getArticlesPreview = (item) => {
-    return (<img src={`${PUBLIC_URL}${item.preview}`} alt={item.title} />)
+    return (<img src={`${PUBLIC_URL}${item.preview}`} alt={item.title} loading="lazy" />)
+}
+
+export const getTestimonialAuthorImage = (item) => {
+    return (<img src={`${PUBLIC_URL}${item.image}`} alt='testimonialALt' />)
 }
 
 export const getVacancies = async () => {
@@ -57,6 +61,47 @@ export const getVacancies = async () => {
     } catch (error) {
         console.error("Error!!!!!!!!!" + error)
     }
+}
+
+export const getTestimonials = async (relation) => {
+    try {
+        const response = await axios.get(`${API_URL}/testimonials/search?relation=${relation}`)
+        // const response = await axios.get(`${API_URL}/testimonials`)
+        return response.data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const getUserFromLoyalty = async (salesId, username) => {
+    try {
+        //запит на ірікс для отримання певного юзера за 2 полями salesId, username
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const postAuth = async (salesId, username) => {
+    const responce = await axios.post(`${API_URL}/auth/token`, {
+        username: salesId,
+        password: username
+    })
+    localStorage.setItem('token', JSON.stringify(responce.data.access_token))
+    localStorage.setItem('username', username)
+    return responce
 }
 
 export const postResume = async (formData, navigate) => {
@@ -71,19 +116,6 @@ export const postResume = async (formData, navigate) => {
     } catch (error) {
         alert('There was an error submitting the form.');
     }
-}
-
-export const getTestimonials = async () => {
-    try {
-        const response = await axios.get(`${API_URL}/testimonials`)
-        return response.data
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-export const getTestimonialAuthorImage = (item) => {
-    return (<img src={`${PUBLIC_URL}${item.image}`} alt={item.title} />)
 }
 
 export const postRequestRegister = async (formData, navigate) => {
@@ -104,7 +136,26 @@ export const postRequestRegister = async (formData, navigate) => {
     }
 };
 
-export const postLogin = async (data) => {
+export const postRequestForPoints = async (formData, onClose) => {
+    try {
+        const response = await axios.post(`${API_URL}/requestForPoints`, formData, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.status === 200) {
+            alert('Data sent');
+            onClose();
+        } else {
+            alert('Error sending data');
+        }
+    } catch (error) {
+        alert('An error occurred while sending data');
+    }
+};
+
+export const postLoginMain = async (data) => {
     try {
         const response = await axios.post('https://www.volero.net/reseller/auth', data, {
             headers: {

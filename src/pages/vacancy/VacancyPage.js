@@ -10,6 +10,19 @@ import PhoneNumberInput from '../../components/phoneNumberInput/PhoneNumberInput
 import { postResume } from '../../api';
 
 export default function VacancyPage() {
+
+    useEffect(() => {
+        const link = document.createElement('link');
+        link.rel = 'preconnect';
+        link.href = `${process.env.REACT_APP_API_URL}`;
+
+        document.head.appendChild(link);
+
+        return () => {
+            document.head.removeChild(link);
+        };
+    }, []);
+
     const location = useLocation();
     const navigate = useNavigate();
     const vacancy = location.state?.vacancy;
@@ -58,6 +71,25 @@ export default function VacancyPage() {
         await postResume(formData, navigate)
     }
 
+    if (!vacancy) {
+        return (
+            <div>
+                <Header />
+                <div className="main">
+                    <div className='gray__background'>
+                        <div className='container'>
+                            <div className='vacancy__error__content'>
+                                <h2>Vacancy details not available</h2>
+                                <button onClick={() => navigate('/vacancies')}>Back to Vacancies List</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <Footer />
+            </div>
+        );
+    }
+
     return (
         <div>
             <Header />
@@ -69,8 +101,12 @@ export default function VacancyPage() {
                                 <div className='title__line'></div>
                                 <div className='title__text'>Our vacancy</div>
                             </div>
-                            <div className='title'>{vacancy.title}</div>
-                            <div className='vacan__details'>{vacancy.location} &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; {vacancy.employmentType}</div>
+                            <div className='title'>{vacancy?.title || 'Vacancy Title Not Available'}</div>
+                            {/* <div className='vacan__details'>{vacancy.location} &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; {vacancy.employmentType}</div> */}
+                            <div className='vacan__details'>
+                                {vacancy?.location ? `${vacancy.location} | ${vacancy.employmentType}` : 'Location and employment type not available'}
+                            </div>
+
                             <button className='vacancy__btn' onClick={handleApplyNowClick}>Apply now</button>
                         </div>
                     </div>
@@ -78,7 +114,7 @@ export default function VacancyPage() {
                 <div className='white__background'>
                     <div className='container'>
                         <div className='vacancy__second__block'>
-                            <Inner serverContent={vacancy.body} />
+                            <Inner serverContent={vacancy?.body} />
                         </div>
                     </div>
                 </div>
