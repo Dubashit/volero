@@ -95,13 +95,17 @@ export const getUserFromLoyalty = async (salesId, username) => {
 
 
 export const postAuth = async (salesId, username) => {
-    const responce = await axios.post(`${API_URL}/auth/token`, {
-        username: salesId,
-        password: username
-    })
-    localStorage.setItem('token', JSON.stringify(responce.data.access_token))
-    localStorage.setItem('username', username)
-    return responce
+    try {
+        const responce = await axios.post(`${API_URL}/auth/token`, {
+            username: salesId,
+            password: username
+        })
+        localStorage.setItem('token', JSON.stringify(responce.data.access_token))
+        localStorage.setItem('username', username)
+        return responce
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 export const postResume = async (formData, navigate) => {
