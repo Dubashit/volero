@@ -64,6 +64,8 @@ export default function LoginPage() {
 
         if (responce.data.access_token) {
             window.open('http://localhost:3002/agents', '_blank');
+            console.log(responce.data.access_token);
+            
         } else {
             const agent = await getUserFromLoyalty(salesId, username)
             navigate('/loyalty', { state: agent })
