@@ -1,29 +1,29 @@
-# Use the official Node.js image as the base image
-FROM node:18-alpine
+# Используем Node.js для сборки React-приложения
+FROM node:18 AS build
 
-# Set the working directory in the container
+# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Copy the package.json and package-lock.json (if available)
+# Копируем package.json и package-lock.json для установки зависимостей
 COPY package*.json ./
 
-# Install dependencies
+# Устанавливаем зависимости
 RUN npm install
 
-# Copy the rest of the application code to the container, including .env
+# Копируем весь проект в контейнер
 COPY . .
 
-# Build the React application
+# Сборка приложения
 RUN npm run build
 
-# Install a simple HTTP server to serve the static files
-RUN npm install -g serve
+# Настраиваем сервер для статических файлов
+FROM nginx:alpine
 
-# Set the environment variables (port can be overridden in your .env file if needed)
-ENV PORT=3000
+# Копируем сгенерированные статические файлы из предыдущего этапа в директорию, обслуживаемую Nginx
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose the port the app will run on
-EXPOSE 3000
+# Порт, который будет использоваться
+EXPOSE 80
 
-# Command to run the application
-CMD ["serve", "-s", "build", "-l", "3000"]
+# Запускаем Nginx
+CMD ["nginx", "-g", "daemon off;"]
