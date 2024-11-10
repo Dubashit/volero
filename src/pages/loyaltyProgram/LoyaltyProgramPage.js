@@ -5,15 +5,21 @@ import './index.css'
 import ScrollToTopButton from '../../components/scrollToTopButton/ScrollToTopButton'
 import { useLocation, useNavigate } from 'react-router-dom'
 import FeedBack from '../../components/feedBack/FeedBack'
+import { exampleQuerry } from '../../api'
 
 export default function LoyaltyProgramPage() {
 
     const navigate = useNavigate()
     const location = useLocation()
 
+    const example = async () => {
+        await exampleQuerry();
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0)
         document.title = 'Volerò - Loyalty Program'
+        example();
     }, [location])
 
     return (

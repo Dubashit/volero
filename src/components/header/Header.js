@@ -18,7 +18,7 @@ export default function Header() {
     }
 
     return (
-        <header>
+        <header className='header__web'>
             <div>
                 <img onClick={() => { navigate('/') }} className='logo' src='/logoRed.webp' alt='logo' draggable='false' />
                 <div className={`nav ${isMenuOpen ? 'open' : ''}`}>

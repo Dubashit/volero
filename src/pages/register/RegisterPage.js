@@ -93,7 +93,7 @@ export default function RegisterPage() {
               </p>
             </div>
             <div className={window.innerWidth >= 425 ? 'register__block' : 'register__block__mobile'}>
-              <button className='already__btn' onClick={() => { navigate('/login') }}>
+              <button className='already__btn' onClick={() => { navigate('/login?source=main') }}>
                 <u>I already have an account</u>
               </button>
               <div className='navbar'>

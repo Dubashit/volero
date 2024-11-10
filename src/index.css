@@ -78,13 +78,13 @@ button {
 }
 
 .item__line__1440,
-.item__line__1024{
+.item__line__1024 {
     width: 2px;
     height: 100px;
     background-color: #ccc;
 }
 
-.item__line__1024{
+.item__line__1024 {
     display: none;
 }
 
@@ -119,12 +119,92 @@ a {
     margin: 0 auto;
 }
 
-@media(max-width:1024px){
-    .item__line__1440{
+
+
+
+
+
+
+
+
+
+
+
+
+.title__admin {
+    font-size: 26px;
+    font-weight: 500;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.subtitle__admin {
+    font-size: 18px;
+    color: #888;
+}
+
+.subtitle__optional__admin {
+    font-size: 18px;
+    color: #888;
+}
+
+.subtitle__admin::after {
+    content: " *";
+    color: red;
+}
+
+.main__admin {
+    display: flex;
+    margin-top: 70px;
+    overflow-y: hidden;
+    height: 100vh;
+}
+
+.main__content__admin {
+    width: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+.all__content__admin {
+    padding: 20px 30px;
+}
+
+.content__block__admin {
+    padding: 20px;
+    background-color: #F3F5F9;
+    box-shadow: 0px 4px 10px rgb(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin-bottom: 100px;
+}
+
+.list__title__admin {
+    font-size: 22px;
+    color: #730901;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:1024px) {
+    .item__line__1440 {
         display: none;
     }
 
-    .item__line__1024{
+    .item__line__1024 {
         display: flex;
     }
 }
@@ -134,11 +214,11 @@ a {
         font-size: 30px;
     }
 
-    .page__title{
+    .page__title {
         font-size: 36px;
     }
 
-    .description{
+    .description {
         font-size: 22px;
     }
 
@@ -154,31 +234,31 @@ a {
     }
 }
 
-@media(max-width:500px){
-    .item__line__1024{
+@media(max-width:500px) {
+    .item__line__1024 {
         display: none;
     }
 }
 
-@media(max-width:426px){
+@media(max-width:426px) {
 
-    .title{
+    .title {
         font-size: 28px;
     }
 
     .white__background {
         padding: 40px 0;
     }
-    
+
     .gray__background {
         padding: 40px 0;
     }
-    
+
     .darkgray__background {
         padding: 40px 0;
     }
 }
 
-img{
+img {
     overflow: hidden;
 }

@@ -52,8 +52,6 @@ export default function LoginPage() {
             password: password
         };
 
-        console.log(data);
-
         await postLoginMain(data);
     }
 
@@ -63,12 +61,20 @@ export default function LoginPage() {
         const responce = await postAuth(salesId, username)
 
         if (responce.data.access_token) {
-            window.open('http://localhost:3002/agents', '_blank');
-            console.log(responce.data.access_token);
-            
+            navigate('/admin/agents')
+            window.location.reload();
         } else {
-            const agent = await getUserFromLoyalty(salesId, username)
-            navigate('/loyalty', { state: agent })
+            console.log("salesID: " + salesId, "username: " + username);
+
+            const response = await getUserFromLoyalty(salesId, username)
+
+            let agent = response.data;
+
+            if (response.status === 200) {
+                navigate('/loyalty', { state: { agent } })
+            } else {
+                alert("error")
+            }
         }
     }
 

@@ -1,0 +1,74 @@
+.agents__list {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.agents__list thead th {
+    color: #69070D;
+    text-align: left;
+    padding: 12px;
+    font-weight: 300;
+}
+
+.agents__list tbody td {
+    padding: 12px;
+    border-top: 1px solid #ddd;
+}
+
+.agents__list tbody{
+    align-items: center;
+}
+
+.agents__list tbody td:nth-child(1) {
+    padding-left: 10px;
+}
+
+.agents__list thead th:nth-child(1) {
+    width: 80px;
+}
+
+.agents__list thead th:nth-child(2) {
+    width: 80px;
+}
+
+.agents__list thead th:nth-child(3) {
+    width: 100px;
+}
+
+.agents__list thead th:nth-child(4) {
+    width: 200px;
+}
+
+.agents__list thead th:nth-child(5) {
+    width: 300px;
+}
+
+.agents__list thead th:nth-child(6),
+.agents__list thead th:nth-child(7),
+.agents__list thead th:nth-child(8) {
+    width: 80px;
+}
+
+.agent__item:hover{
+    background-color: #e9e9e9;
+    cursor: pointer;
+}
+
+.total__money{
+    padding: 10px;
+    background-color: #F3F5F9;
+    box-shadow: 0px 4px 10px rgb(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.total__money>p{
+    display: flex;
+    gap: 20px;
+    font-weight: 400;
+}
+
+.total__money>p>div>span{
+    font-weight: 600;
+}
