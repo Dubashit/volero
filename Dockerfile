@@ -1,5 +1,5 @@
 # Используем базовый образ Node.js
-FROM node:18
+FROM node:16-alpine
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
@@ -13,11 +13,8 @@ RUN npm install
 # Копируем все файлы проекта
 COPY . .
 
-# Собираем приложение
-RUN npm run build
-
 # Указываем порт, на котором работает сервер
-EXPOSE 3000
+EXPOSE 8081
 
 # Запускаем сервер
 CMD ["npm", "start"]
