@@ -62,7 +62,6 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/blog" element={<BlogPage />} />
@@ -76,9 +75,8 @@ function App() {
         <Route path="/career/vacancy/:id" element={<VacancyPage />} />
         <Route path="/privacyPolicy" element={<PrivacyPage />} />
         <Route path="/termsOfUse" element={<TermsOfUsePage />} />
-        <Route path="/loyalty" element={<PointsPage />} />
+        <Route path="/points/:salesId/:username/:id" element={<PointsPage />} />
 
-        {/* Protected Admin Routes */}
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
           <Route path="/admin/agents" element={renderPageWithLayout(AgentsPage)} />
           <Route path="/admin/agentsDetails/:id" element={renderPageWithLayout(AgentsDetailsPage)} />

@@ -14,7 +14,8 @@ export default function ModalForm({ show, onClose }) {
 
     if (!show) return null;
 
-    const sendForm = async () => {
+    const sendForm = async (e) => {
+        e.preventDefault();
         try {
             const formData = new FormData();
             formData.append('username', username)

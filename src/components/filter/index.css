@@ -87,6 +87,22 @@
     box-shadow: 0px 4px 10px rgb(0, 0, 0, 0.2);
 }
 
+.export__btn{
+    width: 200px;
+    height: 20px;
+    background-color: #69070D;
+    border: 1px solid #ccc;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 30px;
+    text-align: center;
+}
+
+.export__btn:hover{
+    box-shadow: 0px 4px 10px rgb(0, 0, 0, 0.2);
+}
+
 .search__btn {
     width: 200px;
     height: 20px;
@@ -106,6 +122,12 @@
 .search__btn__resume,
 .reset__btn__resume{
     width: 180px;
+}
+
+.reset__btn__agent,
+.export__btn__agent,
+.search__btn__agent{
+    width: 90px;
 }
 
 .input__testimonial{

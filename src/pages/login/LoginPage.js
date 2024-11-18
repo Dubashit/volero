@@ -4,6 +4,8 @@ import Footer from '../../components/footer/Footer'
 import './index.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getUserFromLoyalty, postAuth, postLoginMain } from '../../api';
+import { notification } from 'antd';
+import axios from 'axios';
 
 
 export default function LoginPage() {
@@ -58,22 +60,45 @@ export default function LoginPage() {
     const handleLoginLoyalty = async (e) => {
         e.preventDefault();
 
+        // const formData = new URLSearchParams();
+        // formData.append('resellerCode', salesId);
+        // formData.append('username', salesId);
+        // formData.append('password', username);
+        // formData.append('action', 'login');
+
+        // const loginInIrix = await axios.post('https://185.131.222.183/_test/admin/auth/', formData, {
+        //     headers: {
+        //         'Content-Type': 'application/x-www-form-urlencoded',
+        //     },
+        // });
+        // if(loginInIrix){
+        //     console.log("loh");
+            
+        // }
+        // console.log(loginInIrix.data);
+        
+
         const responce = await postAuth(salesId, username)
 
         if (responce.data.access_token) {
             navigate('/admin/agents')
-            window.location.reload();
+            // window.location.reload();
         } else {
-            console.log("salesID: " + salesId, "username: " + username);
-
             const response = await getUserFromLoyalty(salesId, username)
 
-            let agent = response.data;
-
-            if (response.status === 200) {
-                navigate('/loyalty', { state: { agent } })
+            if (response !== undefined) {
+                notification.success({
+                    message: 'Successful login',
+                    description: 'You have successfully logged into the loyalty system!',
+                    duration: 3
+                });
+                navigate(`/points/${response.data.salesId}/${response.data.username}/${response.data.id}`, { state: { agent: response.data } })
             } else {
-                alert("error")
+                notification.error({
+                    message: 'Error',
+                    description: 'Agent not found',
+                    duration: 3
+                });
             }
         }
     }

@@ -58,6 +58,7 @@
     width: 100%;
     border-collapse: collapse;
     text-align: left;
+    margin-bottom: 40px;
 }
 
 .agents__details__list thead th {

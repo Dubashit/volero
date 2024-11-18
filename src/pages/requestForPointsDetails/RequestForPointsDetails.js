@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { putRequestForPoints } from '../../api'
 import './index.css'
+import { notification } from 'antd'
 
 export default function RequestForPointsDetails() {
 
@@ -18,11 +19,20 @@ export default function RequestForPointsDetails() {
     const setCompleted = async () => {
         try {
             await putRequestForPoints(requestForPoints.id, { isDone: 'Completed' });
-            alert('Request marked as completed');
+            notification.success({
+                message: 'Successful',
+                description: 'Request marked as completed',
+                duration: 3
+            });
             
-            navigate('/requestForPoints', { state: { refresh: true } }); 
+            navigate('/admin/requestForPoints', { state: { refresh: true } }); 
         } catch (error) {
             console.error('Error updating request:', error);
+            notification.error({
+                message: 'Error',
+                description: 'Failed to updating request',
+                duration: 3
+            });
         }
     };
 

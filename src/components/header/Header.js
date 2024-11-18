@@ -27,14 +27,14 @@ export default function Header() {
                     <div onClick={() => { navigate('/loyaltyProgram'); setMenuOpen(false) }} className={isActive('/loyaltyProgram')}>Loyalty program</div>
                     <div onClick={() => { navigate('/blog'); setMenuOpen(false) }} className={isActive('/blog')}>Blog</div>
                     <div onClick={() => { navigate('/contacts'); setMenuOpen(false) }} className={isActive('/contacts')}>Contact us</div>
-                    {location.pathname !== '/loyalty' && (
+                    {!location.pathname.includes('/points') && (
                         <div className='btns__block'>
                             <button onClick={() => { navigate('/login?source=main'); setMenuOpen(false) }} className={isActiveBtn('/login')}>Log in</button>
                             {/* <a href='https://www.volero.net/reseller/auth/' className={isActiveBtn('/login')}>Log in</a> */}
                             <button onClick={() => { navigate('/register') }} className={isActiveBtn('/register')}>Join us</button>
                         </div>
                     )}
-                    {location.pathname === '/loyalty' && (
+                    {location.pathname.includes('/points') && (
                         <button onClick={() => { navigate('/') }} className='header__btn__login'>Log out</button>
                     )}
                 </div>

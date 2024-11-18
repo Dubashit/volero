@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './index.css'
 import { useLocation } from 'react-router-dom'
 import { putPassword } from '../../api'
+import { notification } from 'antd'
 
 export default function ChangePasswordpage() {
 
@@ -21,7 +22,11 @@ export default function ChangePasswordpage() {
         if (newPassword === repeatNewPassword) {
             await putPassword(username, password, newPassword)
         } else {
-            console.log("pass not maches");
+            notification.error({
+                message: 'Error',
+                description: 'Passwords don`t match',
+                duration: 3
+            });
         }
     }
 

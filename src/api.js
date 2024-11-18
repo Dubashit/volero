@@ -1,15 +1,21 @@
 import axios from "axios";
 import { API_URL, PUBLIC_URL } from "./config";
+import { notification } from 'antd'
 
-export const exampleQuerry = async () => {
-    try {
-        const response = await axios.get("https://www.volero.net/reseller/api/reservationsApi/v1/reservations")
-        console.log(response);
-        console.log(response.data);
-    } catch (error) {
-        console.error(error);
-    }
-}
+// export const exampleQuerry = async () => {
+//     try {
+//         const response = await axios.get("https://www.volero.net/reseller/api/reservationsApi/v1/reservations")
+//         console.log(response);
+//         console.log(response.data);
+//     } catch (error) {
+//         console.error(error);
+//         notification.error({
+//             message: 'Error',
+//             description: 'The server is not responding',
+//             duration: 3
+//         });
+//     }
+// }
 
 export const getTags = async () => {
     try {
@@ -17,6 +23,11 @@ export const getTags = async () => {
         return response.data
     } catch (error) {
         console.error(error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
@@ -28,6 +39,11 @@ export const getBlogs = async () => {
         return response.data
     } catch (error) {
         console.error(error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
@@ -52,6 +68,11 @@ export const getRelatedArticles = async (item) => {
             return responses;
         } catch (error) {
             console.error('Error fetching related blogs:', error);
+            notification.error({
+                message: 'Error',
+                description: 'The server is not responding',
+                duration: 3
+            });
         }
     }
 };
@@ -70,30 +91,38 @@ export const getVacancies = async () => {
         return responce.data
     } catch (error) {
         console.error("Error!!!!!!!!!" + error)
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 }
 
 export const getTestimonials = async (relation) => {
     try {
         const response = await axios.get(`${API_URL}/testimonials/search?relation=${relation}`)
-        // const response = await axios.get(`${API_URL}/testimonials`)
         return response.data
     } catch (error) {
         console.error(error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 }
 
 export const getUserFromLoyalty = async (salesId, username) => {
     try {
-        const response = await axios.get(`${API_URL}/agents/pointsData/`, {
-            params: {
-                salesId: salesId,
-                username: username
-            }
-        })        
-        return response
+        return await axios.get(`${API_URL}/agents/pointsData/${username}/${salesId}`)
     } catch (error) {
         console.error(error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 }
 
@@ -117,24 +146,45 @@ export const postAuth = async (salesId, username) => {
             password: username
         })
         localStorage.setItem('authToken', JSON.stringify(responce.data.access_token))
-        localStorage.setItem('username', username)
+        localStorage.setItem('username', salesId)
         return responce
     } catch (error) {
         console.error(error)
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 }
 
 export const postResume = async (formData, navigate) => {
     try {
-        await axios.post(`${API_URL}/resume`, formData, {
+        const res = await axios.post(`${API_URL}/resume`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         });
-        alert('Form submitted successfully!');
-        navigate('/')
+        if(res.status === 200 || res.status === 204){
+            notification.success({
+                message: 'Successful',
+                description: 'Form submitted successfully!',
+                duration: 3
+            });
+            navigate('/')
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'There was an error submitting the form.',
+                duration: 3
+            });
+        }
     } catch (error) {
-        alert('There was an error submitting the form.');
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 }
 
@@ -146,13 +196,26 @@ export const postRequestRegister = async (formData, navigate) => {
             },
         });
         if (response.status === 200) {
-            alert('Data sent');
+            notification.success({
+                message: 'Successful',
+                description: 'Your information has been sent.',
+                duration: 3
+            });
             navigate('/')
         } else {
-            alert('Error sending data');
+            notification.error({
+                message: 'Error',
+                description: 'Error in sending information',
+                duration: 3
+            });
         }
     } catch (error) {
         console.error(error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
@@ -165,13 +228,26 @@ export const postRequestForPoints = async (formData, onClose) => {
         });
 
         if (response.status === 200) {
-            alert('Data sent');
+            notification.success({
+                message: 'Successful',
+                description: 'Your information has been sent.',
+                duration: 3
+            });
             onClose();
         } else {
-            alert('Error sending data');
+            notification.error({
+                message: 'Error',
+                description: 'Error in sending information',
+                duration: 3
+            });
         }
     } catch (error) {
-        alert('An error occurred while sending data');
+        console.error(error)
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
@@ -190,6 +266,11 @@ export const postLoginMain = async (data) => {
         }
     } catch (error) {
         console.error('Error:', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 }
 
@@ -221,6 +302,11 @@ export const getTagsFromArticlesAdd = async () => {
         return tagsResponse.data.map(tag => ({ value: tag.title, label: tag.title }));
     } catch (error) {
         console.error("Error while fetching tags: ", error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 export const getRelatedArticlesAdmin = async () => {
@@ -229,6 +315,11 @@ export const getRelatedArticlesAdmin = async () => {
         return articles.data.map(article => ({ value: article.title, label: article.title }));
     } catch (error) {
         console.error("Error : " + error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
@@ -239,6 +330,11 @@ export const getTagsFromArticlesEdit = async () => {
         return filteredTags
     } catch (error) {
         console.error("Error while fetching tags: ", error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
@@ -249,6 +345,11 @@ export const getRelatedArticlesExceptSelected = async (id) => {
         return filteredArticles
     } catch (error) {
         console.error("Error : " + error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 }
 
@@ -308,6 +409,8 @@ export const getVacanciesAdmin = async (setFilteredVacancies) => {
 
 export const getAgents = async () => {
     const response = await axios.get(`${API_URL}/agents`);
+    localStorage.removeItem('countAgents')
+    localStorage.setItem('countAgents', response.data.length)
     return response.data
 }
 
@@ -343,9 +446,12 @@ export const postVacancy = async (formData, navigate) => {
         },
     });
     if (response.status === 200) {
-        navigate('/vacancies');
-    } else {
-        alert('Error!');
+        navigate('/admin/vacancies');
+        return notification.success({
+            message: 'Successful',
+            description: 'New vacancy has been created.',
+            duration: 3
+        });
     }
 }
 
@@ -356,9 +462,12 @@ export const postArticle = async (formData, navigate) => {
         },
     });
     if (response.status === 200) {
-        navigate('/articles');
-    } else {
-        alert('Error!');
+        navigate('/admin/articles');
+        return notification.success({
+            message: 'Successful',
+            description: 'New articles has been created.',
+            duration: 3
+        });
     }
 }
 
@@ -369,9 +478,12 @@ export const postTestimonial = async (formData, navigate) => {
         },
     });
     if (response.status === 200) {
-        navigate('/testimonials');
-    } else {
-        alert('Error!');
+        navigate('/admin/testimonials');
+        return notification.success({
+            message: 'Successful',
+            description: 'New testimonial has been created.',
+            duration: 3
+        });
     }
 }
 
@@ -394,14 +506,14 @@ export const postTag = async (title) => {
 }
 
 export const postCoefficient = async (salesId, percentage) => {
-    await axios.post(`${API_URL}/coefficients`, {
+    return await axios.post(`${API_URL}/coefficients`, {
         salesId,
         percentage
-    });
+    })
 }
 
 export const postReward = async (userId, type, pool, amount, comment) => {
-    await axios.post(`${API_URL}/rewards`, {
+    return await axios.post(`${API_URL}/rewards`, {
         userId,
         type,
         pool,
@@ -411,10 +523,9 @@ export const postReward = async (userId, type, pool, amount, comment) => {
 }
 
 export const updateAgentEmail = async (email, agent) => {
-    const res = await axios.patch(`${API_URL}/agents/${agent.id}`,{
+    return await axios.patch(`${API_URL}/agents/${agent.id}`, {
         email
     });
-    return res
 }
 
 
@@ -433,52 +544,80 @@ export const updateAgentEmail = async (email, agent) => {
 
 
 export const putVacancy = async (formData, navigate, vacancy) => {
-
-    formData.forEach(item => {
-        console.log(item);
-    })
-
     try {
-        const responce = await axios.put(`${API_URL}/vacancies/${vacancy.id}`, formData)
+        const responce = await axios.put(`${API_URL}/vacancies/${vacancy.id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+
         if (responce.status === 200) {
-            navigate('/vacancies')
-        } else {
-            alert('Error!')
+            navigate('/admin/vacancies');
+            return notification.success({
+                message: 'Successful',
+                description: 'Vacancy has been updated.',
+                duration: 3
+            });
         }
     } catch (error) {
         console.error('Error updating vacancy:', error);
+        return notification.error({
+            message: 'Error',
+            description: 'Internal server error',
+            duration: 3
+        });
     }
 }
 
 export const putArticle = async (formData, navigate, article) => {
-    const response = await axios.put(`${API_URL}/articles/${article.id}`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-    });
+    try {
+        const response = await axios.put(`${API_URL}/articles/${article.id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
 
-    if (response.status === 200) {
-        console.log('Article saved successfully:', response.data);
-        navigate('/articles');
-    } else {
-        console.error('Error saving article:', response);
-        alert('Error saving article!');
+        if (response.status === 200) {
+            navigate('/admin/articles');
+            return notification.success({
+                message: 'Successful',
+                description: 'Article has been updated.',
+                duration: 3
+            });
+        }
+    } catch (error) {
+        console.error('Error updating article:', error);
+        return notification.error({
+            message: 'Error',
+            description: 'Internal server error',
+            duration: 3
+        });
     }
 }
 
 export const putTestimonial = async (formData, navigate, testimonial) => {
-    const response = await axios.put(`${API_URL}/testimonials/${testimonial.id}`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-    });
+    try {
+        const response = await axios.put(`${API_URL}/testimonials/${testimonial.id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
 
-    if (response.status === 200) {
-        console.log('Testimonisl saved successfully:', response.data);
-        navigate('/testimonials');
-    } else {
-        console.error('Error saving testimonial:', response);
-        alert('Error saving testimonial!');
+        if (response.status === 200) {
+            navigate('/admin/testimonials');
+            return notification.success({
+                message: 'Successful',
+                description: 'Testimonial has been updated.',
+                duration: 3
+            });
+        }
+    } catch (error) {
+        console.error('Error updating testimonial:', error);
+        return notification.error({
+            message: 'Error',
+            description: 'Internal server error',
+            duration: 3
+        });
     }
 }
 
@@ -486,11 +625,11 @@ export const putCoefficient = async (item, salesIdCoef, percentage) => {
     return await axios.put(`${API_URL}/coefficients/${item.id}`, { salesId: salesIdCoef, percentage });
 }
 
-export const putTags = async (item, titleTag) => {
+export const putTag = async (item, titleTag) => {
     return await axios.put(`${API_URL}/tags/${item.id}`, { title: titleTag });
 }
 
-export const putLanguages = async (item, code, titleLanguage) => {
+export const putLanguage = async (item, code, titleLanguage) => {
     return await axios.put(`${API_URL}/languages/${item.id}`, { code, title: titleLanguage });
 }
 
@@ -504,9 +643,19 @@ export const putPassword = async (username, password, newPassword) => {
             password: password,
             newPassword: newPassword
         })
-        alert(responce.data.message)
+        if (responce.status === 200) {
+            notification.success({
+                message: 'Successful',
+                description: 'Password has been changed',
+                duration: 3
+            });
+        }
     } catch (error) {
-        console.error('Error', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 }
 
@@ -520,6 +669,11 @@ export const putRequestForPoints = async (id, data) => {
         return response;
     } catch (error) {
         console.error('Error', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
@@ -540,46 +694,136 @@ export const putRequestForPoints = async (id, data) => {
 
 export const searchTags = async (titleTag, setFilteredItems) => {
     try {
-        const responce = await axios.get(`${API_URL}/tags?title=${titleTag}`);
-        setFilteredItems(responce.data);
+        const response = await axios.get(`${API_URL}/tags?title=${titleTag}`);
+        if(response.status === 200){
+            setFilteredItems(response.data)
+            notification.success({
+                message: 'OK',
+                description: `Number of records found: ${response.data.length}`,
+                duration: 3
+            });
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'Data retrieval error',
+                duration: 3
+            });
+        }
     } catch (error) {
         console.error('Error fetching tags:', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
 export const searchCoefficients = async (salesIdCoef, percentage, setFilteredItems) => {
     try {
-        const responce = await axios.get(`${API_URL}/coefficients/search?salesId=${salesIdCoef}&percentage=${percentage}`);
-        setFilteredItems(responce.data);
+        const response = await axios.get(`${API_URL}/coefficients/search?salesId=${salesIdCoef}&percentage=${percentage}`);
+        if(response.status === 200){
+            setFilteredItems(response.data)
+            notification.success({
+                message: 'OK',
+                description: `Number of records found: ${response.data.length}`,
+                duration: 3
+            });
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'Data retrieval error',
+                duration: 3
+            });
+        }
     } catch (error) {
         console.error('Error fetching coefficients:', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
 export const searchLanguages = async (code, titleLanguage, setFilteredItems) => {
     try {
-        const responce = await axios.get(`${API_URL}/languages/search?code=${code}&title=${titleLanguage}`)
-        setFilteredItems(responce.data);
+        const response = await axios.get(`${API_URL}/languages/search?code=${code}&title=${titleLanguage}`)
+        if(response.status === 200){
+            setFilteredItems(response.data)
+            notification.success({
+                message: 'OK',
+                description: `Number of records found: ${response.data.length}`,
+                duration: 3
+            });
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'Data retrieval error',
+                duration: 3
+            });
+        }
     } catch (error) {
         console.error('Error fetching languages:', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
 export const searchStopList = async (salesIdStopList, usernameStopList, setFilteredItems) => {
     try {
-        const responce = await axios.get(`${API_URL}/stopList/search?salesId=${salesIdStopList}&username=${usernameStopList}`)
-        setFilteredItems(responce.data)
+        const response = await axios.get(`${API_URL}/stopList/search?salesId=${salesIdStopList}&username=${usernameStopList}`)
+        if(response.status === 200){
+            setFilteredItems(response.data)
+            notification.success({
+                message: 'OK',
+                description: `Number of records found: ${response.data.length}`,
+                duration: 3
+            });
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'Data retrieval error',
+                duration: 3
+            });
+        }
     } catch (error) {
         console.error('Error fetching stop list:', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
 export const searchVacancies = async (titleVacancy, statusVacancy, setFilteredItems) => {
     try {
-        const responce = await axios.get(`${API_URL}/vacancies/search?title=${titleVacancy}&status=${statusVacancy}`)
-        setFilteredItems(responce.data)
+        const response = await axios.get(`${API_URL}/vacancies/search?title=${titleVacancy}&status=${statusVacancy}`)
+        if(response.status === 200){
+            setFilteredItems(response.data)
+            notification.success({
+                message: 'OK',
+                description: `Number of records found: ${response.data.length}`,
+                duration: 3
+            });
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'Data retrieval error',
+                duration: 3
+            });
+        }
     } catch (error) {
         console.error('Error fetching vacancies:', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
@@ -595,27 +839,81 @@ export const searchResume = async (nameResume, startDate, endDate, setFilteredIt
         }
 
         const response = await axios.get(url);
-        setFilteredItems(response.data);
+        if(response.status === 200){
+            setFilteredItems(response.data)
+            notification.success({
+                message: 'OK',
+                description: `Number of records found: ${response.data.length}`,
+                duration: 3
+            });
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'Data retrieval error',
+                duration: 3
+            });
+        }
     } catch (error) {
         console.error('Error fetching resume:', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
 export const searchArticles = async (titleArticle, statusArticle, setFilteredItems) => {
     try {
-        const responce = await axios.get(`${API_URL}/articles/search?title=${titleArticle || ''}&status=${statusArticle || ''}`)
-        setFilteredItems(responce.data)
+        const response = await axios.get(`${API_URL}/articles/search?title=${titleArticle || ''}&status=${statusArticle || ''}`)
+        if(response.status === 200){
+            setFilteredItems(response.data)
+            notification.success({
+                message: 'OK',
+                description: `Number of records found: ${response.data.length}`,
+                duration: 3
+            });
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'Data retrieval error',
+                duration: 3
+            });
+        }
     } catch (error) {
         console.error('Error fetching articles:', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
 export const searchTestimonials = async (author, position, countOfStars, setFilteredItems) => {
     try {
-        const responce = await axios.get(`${API_URL}/testimonials/search?author=${author}&position=${position}&countOfStars=${countOfStars}`)
-        setFilteredItems(responce.data)
+        const response = await axios.get(`${API_URL}/testimonials/search?author=${author}&position=${position}&countOfStars=${countOfStars}`)
+        if(response.status === 200){
+            setFilteredItems(response.data)
+            notification.success({
+                message: 'OK',
+                description: `Number of records found: ${response.data.length}`,
+                duration: 3
+            });
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'Data retrieval error',
+                duration: 3
+            });
+        }
     } catch (error) {
         console.error('Error fetching testimonisls:', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 }
 
@@ -631,9 +929,27 @@ export const searchRequestRegister = async (firstName, lastName, startDate, endD
         }
 
         const response = await axios.get(url);
-        setFilteredItems(response.data);
+        if(response.status === 200){
+            setFilteredItems(response.data)
+            notification.success({
+                message: 'OK',
+                description: `Number of records found: ${response.data.length}`,
+                duration: 3
+            });
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'Data retrieval error',
+                duration: 3
+            });
+        }
     } catch (error) {
         console.error('Error fetching requests registration:', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 
@@ -649,9 +965,54 @@ export const searchRequestForPoints = async (usernameRequestForPoints, email, st
         }
 
         const response = await axios.get(url);
-        setFilteredItems(response.data);
+        if(response.status === 200){
+            setFilteredItems(response.data)
+            notification.success({
+                message: 'OK',
+                description: `Number of records found: ${response.data.length}`,
+                duration: 3
+            });
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'Data retrieval error',
+                duration: 3
+            });
+        }
     } catch (error) {
         console.error('Error fetching requests registration:', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
+    }
+};
+
+export const searchAgents = async (reseller, salesIdAgent, usernameAgent, setFilteredItems) => {
+    try {
+        const response = await axios.get(`${API_URL}/agents/search?reseller=${reseller || ''}&salesId=${salesIdAgent || ''}&username=${usernameAgent || ''}`)
+        if(response.status === 200){
+            setFilteredItems(response.data)
+            notification.success({
+                message: 'OK',
+                description: `Number of records found: ${response.data.length}`,
+                duration: 3
+            });
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'Data retrieval error',
+                duration: 3
+            });
+        }
+    } catch (error) {
+        console.error('Error fetching agents:', error);
+        notification.error({
+            message: 'Error',
+            description: 'The server is not responding',
+            duration: 3
+        });
     }
 };
 

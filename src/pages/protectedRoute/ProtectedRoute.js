@@ -1,9 +1,8 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import RedirectWithReload from '../redicetdWithReload/RedirectWithReload';
+import { Navigate, Outlet } from 'react-router-dom';
 
 function ProtectedRoute({ isAuthenticated }) {
-  return isAuthenticated ? <Outlet /> : <RedirectWithReload to="/login?source=main" />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login?source=main" />;
 }
 
 export default ProtectedRoute;

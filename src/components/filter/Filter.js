@@ -3,9 +3,9 @@ import './index.css';
 import { useLocation } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
-import { searchArticles, searchCoefficients, searchLanguages, searchRequestForPoints, searchRequestRegister, searchResume, searchStopList, searchTags, searchTestimonials, searchVacancies } from '../../api';
+import { searchAgents, searchArticles, searchCoefficients, searchLanguages, searchRequestForPoints, searchRequestRegister, searchResume, searchStopList, searchTags, searchTestimonials, searchVacancies } from '../../api';
 
-export default function Filter({ setFilteredItems, refreshData }) {
+export default function Filter({ setFilteredItems, refreshData, exportToCSV }) {
 
     const location = useLocation()
 
@@ -31,6 +31,9 @@ export default function Filter({ setFilteredItems, refreshData }) {
     const [lastName, setLastName] = useState('')
     const [usernameRequestForPoints, setUsernameRequestForPoints] = useState('')
     const [email, setEmail] = useState('')
+    const [reseller, setReseller] = useState('')
+    const [salesIdAgent, setSalesIdAgent] = useState('')
+    const [usernameAgent, setUsernameAgent] = useState('')
 
     const toggleFilter = () => {
         setIsOpen(!isOpen);
@@ -56,38 +59,51 @@ export default function Filter({ setFilteredItems, refreshData }) {
         setLastName('')
         setUsernameRequestForPoints('')
         setEmail('')
+        setSalesIdAgent('')
+        setReseller('')
+        setUsernameAgent('')
         setStartDate(null)
         setEndDate(null)
         setFilteredItems([]);
         refreshData();
     };
 
+    const exportData = async () => {
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
+
     const searchData = async () => {
-        if (location.pathname.includes('/tags')) {
+        if (location.pathname.includes('/admin/tags')) {
             await searchTags(titleTag, setFilteredItems);
-        } if (location.pathname.includes('/coefficients')) {
+        } if (location.pathname.includes('/admin/coefficients')) {
             await searchCoefficients(salesIdCoef, percentage, setFilteredItems);
-        } if (location.pathname.includes('/languages')) {
+        } if (location.pathname.includes('/admin/languages')) {
             await searchLanguages(code, titleLanguage, setFilteredItems);
-        } if (location.pathname.includes('/stopList')) {
+        } if (location.pathname.includes('/admin/stopList')) {
             await searchStopList(salesIdStopList, usernameStopList, setFilteredItems);
-        } if (location.pathname.includes('/vacancies')) {
+        } if (location.pathname.includes('/admin/vacancies')) {
             await searchVacancies(titleVacancy, statusVacancy, setFilteredItems);
-        } if (location.pathname.includes('/resume')) {
+        } if (location.pathname.includes('/admin/resume')) {
             await searchResume(nameResume, startDate, endDate, setFilteredItems);
-        } if (location.pathname.includes('/articles')) {
+        } if (location.pathname.includes('/admin/articles')) {
             await searchArticles(titleArticle, statusArticle, setFilteredItems);
-        } if (location.pathname.includes('/testimonials')) {
+        } if (location.pathname.includes('/admin/testimonials')) {
             await searchTestimonials(author, position, countOfStars, setFilteredItems);
-        } if (location.pathname.includes('/requestRegister')) {
+        } if (location.pathname.includes('/admin/requestRegister')) {
             await searchRequestRegister(firstName, lastName, startDate, endDate, setFilteredItems);
-        } if (location.pathname.includes('/requestForPoints')) {
+        } if (location.pathname.includes('/admin/requestForPoints')) {
             await searchRequestForPoints(usernameRequestForPoints, email, startDate, endDate, setFilteredItems);
+        } if (location.pathname.includes('/admin/agents')) {
+            await searchAgents(reseller, salesIdAgent, usernameAgent, setFilteredItems);
         }
     }
 
     const renderFilterForm = () => {
-        if (location.pathname === '/coefficients') {
+        if (location.pathname === '/admin/coefficients') {
             return (
                 <div className="filter__body">
                     <div className="filter__row">
@@ -118,7 +134,7 @@ export default function Filter({ setFilteredItems, refreshData }) {
                     </div>
                 </div>
             );
-        } else if (location.pathname === '/tags') {
+        } else if (location.pathname === '/admin/tags') {
             return (
                 <div className="filter__body">
                     <div className="filter__row">
@@ -139,7 +155,7 @@ export default function Filter({ setFilteredItems, refreshData }) {
                     </div>
                 </div>
             );
-        } else if (location.pathname === '/languages') {
+        } else if (location.pathname === '/admin/languages') {
             return (
                 <div className="filter__body">
                     <div className="filter__row">
@@ -170,7 +186,7 @@ export default function Filter({ setFilteredItems, refreshData }) {
                     </div>
                 </div>
             )
-        } else if (location.pathname === '/stopList') {
+        } else if (location.pathname === '/admin/stopList') {
             return (
                 <div className="filter__body">
                     <div className="filter__row">
@@ -201,7 +217,7 @@ export default function Filter({ setFilteredItems, refreshData }) {
                     </div>
                 </div>
             )
-        } else if (location.pathname === '/vacancies') {
+        } else if (location.pathname === '/admin/vacancies') {
             return (
                 <div className="filter__body">
                     <div className="filter__row">
@@ -236,7 +252,7 @@ export default function Filter({ setFilteredItems, refreshData }) {
                     </div>
                 </div>
             )
-        } else if (location.pathname === '/resume') {
+        } else if (location.pathname === '/admin/resume') {
             return (
                 <div className="filter__body">
                     <div className="filter__row">
@@ -280,7 +296,7 @@ export default function Filter({ setFilteredItems, refreshData }) {
                     </div>
                 </div>
             )
-        } else if (location.pathname === '/articles') {
+        } else if (location.pathname === '/admin/articles') {
             return (
                 <div className="filter__body">
                     <div className="filter__row">
@@ -315,7 +331,7 @@ export default function Filter({ setFilteredItems, refreshData }) {
                     </div>
                 </div>
             )
-        } else if (location.pathname === '/testimonials') {
+        } else if (location.pathname === '/admin/testimonials') {
             return (
                 <div className="filter__body">
                     <div className="filter__row">
@@ -358,7 +374,7 @@ export default function Filter({ setFilteredItems, refreshData }) {
                     </div>
                 </div>
             )
-        } else if (location.pathname === '/requestRegister') {
+        } else if (location.pathname === '/admin/requestRegister') {
             return (
                 <div className="filter__body">
                     <div className="filter__row">
@@ -414,7 +430,7 @@ export default function Filter({ setFilteredItems, refreshData }) {
                     </div>
                 </div>
             )
-        } else if (location.pathname === '/requestForPoints') {
+        } else if (location.pathname === '/admin/requestForPoints') {
             return (
                 <div className="filter__body">
                     <div className="filter__row">
@@ -466,6 +482,48 @@ export default function Filter({ setFilteredItems, refreshData }) {
                         <div className='btn__actions'>
                             <button className="reset__btn reset__btn__resume" onClick={resetData}>Reset</button>
                             <button className="search__btn search__btn__resume" onClick={searchData}>Search</button>
+                        </div>
+                    </div>
+                </div>
+            )
+        } else if (location.pathname === '/admin/agents') {
+            return (
+                <div className="filter__body">
+                    <div className="filter__row">
+                        <div className='filter__item'>
+                            <label>Reseller</label>
+                            <input
+                                className='input__resume'
+                                type="text"
+                                value={reseller}
+                                onChange={(e) => { setReseller(e.target.value) }}
+                                required
+                            />
+                        </div>
+                        <div className='filter__item'>
+                            <label>Sales ID</label>
+                            <input
+                                className='input__resume'
+                                type="text"
+                                value={salesIdAgent}
+                                onChange={(e) => { setSalesIdAgent(e.target.value) }}
+                                required
+                            />
+                        </div>
+                        <div className='filter__item'>
+                            <label>Username</label>
+                            <input
+                                className='input__resume'
+                                type="text"
+                                value={usernameAgent}
+                                onChange={(e) => { setUsernameAgent(e.target.value) }}
+                                required
+                            />
+                        </div>
+                        <div className='btn__actions'>
+                            <button className="reset__btn reset__btn__agent" onClick={resetData}>Reset</button>
+                            <button className="export__btn export__btn__agent" onClick={exportToCSV}>Export</button>
+                            <button className="search__btn search__btn__agent" onClick={searchData}>Search</button>
                         </div>
                     </div>
                 </div>

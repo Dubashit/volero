@@ -50,15 +50,9 @@ export default function RegisterPage() {
   const handleContinueClick = async (event) => {
     event.preventDefault();
     if (formType === 'personal') {
-      if (!firstName || !lastName || !email || !phone || !countryCode) {
-        alert('Please enter all required fields')
-      }
       setIsPersonalFormSubmitted(true);
       setFormType('company');
     } else if (formType === 'company') {
-      if (!companyName || !companyType || !roleInCompany || !country || !source || !reason) {
-        alert('Please enter all required fields')
-      }
       const formData = new FormData()
       formData.append('firstName', firstName);
       formData.append('lastName', lastName);

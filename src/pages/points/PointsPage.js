@@ -55,7 +55,7 @@ export default function PointsPage() {
                     <div className='container'>
                         <div className='points__first__block'>
                             <div className='title'>Welcome, {agent?.fullName}</div>
-                            <p>You have {agent?.usd} USD, {agent?.eur} EUR, {agent?.gbp} GBP points available</p>
+                            <p>You have {parseFloat(agent?.usd).toFixed(2)} USD, {parseFloat(agent?.eur).toFixed(2)} EUR, {parseFloat(agent?.gbp).toFixed(2)} GBP points available</p>
                             <p>You can spend your loyalty points on hotel bookings, please <span onClick={() => setIsModalOpen(true)}>contact us</span> or your account manager directly.</p>
                         </div>
                         <div className='point__second__block'>

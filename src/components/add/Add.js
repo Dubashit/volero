@@ -5,6 +5,7 @@ import './index.css';
 import Select from 'react-select';
 import FileUpload from '../fileUploadAdmin/FileUpload';
 import { getRelatedArticlesAdmin, getTagsFromArticlesAdd, postArticle, postTestimonial, postVacancy } from '../../api';
+import { notification } from 'antd';
 
 export default function Add() {
     const location = useLocation();
@@ -55,79 +56,83 @@ export default function Add() {
         setSelectedRelatedArticles(selected);
     };
 
-    const handleCreate = async () => {
-        if (location.pathname === '/vacancies/add') {
+    const handleCreate = async (e) => {
+        e.preventDefault()
+        if (location.pathname === '/admin/vacancies/add') {
             try {
-                if (title && status && seoTitle && seoDescription && body && locationVacancy && employmentType) {
-                    const formData = new FormData()
+                const formData = new FormData()
 
-                    formData.append('title', title)
-                    formData.append('seoUrl', seoUrl || '')
-                    formData.append('seoTitle', seoTitle)
-                    formData.append('seoDescription', seoDescription)
-                    formData.append('body', body)
-                    formData.append('location', locationVacancy)
-                    formData.append('employmentType', employmentType)
-                    formData.append('status', status)
+                formData.append('title', title)
+                formData.append('seoUrl', seoUrl || '')
+                formData.append('seoTitle', seoTitle)
+                formData.append('seoDescription', seoDescription)
+                formData.append('body', body)
+                formData.append('location', locationVacancy)
+                formData.append('employmentType', employmentType)
+                formData.append('status', status)
 
-                    for (let pair of formData.entries()) {
-                        console.log(`${pair[0]}: ${pair[1]}`);
-                    }
+                await postVacancy(formData, navigate)
 
-                    await postVacancy(formData, navigate)
-                    
-                } else {
-                    alert('Please enter all required data');
-                }
             } catch (error) {
                 console.error('Error creating vacancy:', error);
+                notification.error({
+                    message: 'Error',
+                    description: 'Internal server error',
+                    duration: 3
+                });
             }
-        } else if (location.pathname === '/articles/add') {
+        } else if (location.pathname === '/admin/articles/add') {
             try {
-                if (title && status && seoTitle && seoDescription && body && preview) {
-                    const formData = new FormData();
+                const formData = new FormData();
 
-                    formData.append('title', title);
-                    formData.append('author', author || '');
-                    formData.append('seoUrl', seoUrl || '');
-                    formData.append('seoTitle', seoTitle);
-                    formData.append('seoDescription', seoDescription);
-                    formData.append('tags', JSON.stringify(selectedTags.map(tag => tag.value)) || '');
-                    formData.append('relatedArticles', JSON.stringify(selectedRelatedArticles.map(article => article.value)) || '');
-                    formData.append('body', body);
-                    formData.append('status', status);
-                    formData.append('readTime', readTime);
-                    formData.append('preview', preview);
+                formData.append('title', title);
+                formData.append('author', author || '');
+                formData.append('seoUrl', seoUrl || '');
+                formData.append('seoTitle', seoTitle);
+                formData.append('seoDescription', seoDescription);
+                formData.append('tags', JSON.stringify(selectedTags.map(tag => tag.value)) || '');
+                formData.append('relatedArticles', JSON.stringify(selectedRelatedArticles.map(article => article.value)) || '');
+                formData.append('body', body);
+                formData.append('status', status);
+                formData.append('readTime', readTime);
+                formData.append('preview', preview);
 
-                    await postArticle(formData, navigate)
-                } else {
-                    alert('Please enter all required data');
-                }
+                await postArticle(formData, navigate)
+
             } catch (error) {
                 console.error('Error creating article:', error);
+                notification.error({
+                    message: 'Error',
+                    description: 'Internal server error',
+                    duration: 3
+                });
             }
-        } else if (location.pathname === '/testimonials/add') {
+        } else if (location.pathname === '/admin/testimonials/add') {
             try {
-                if (authorTestimonial && position && comment && countOfStars && image && relation) {
-                    const formData = new FormData();
+                const formData = new FormData();
 
-                    formData.append('author', authorTestimonial);
-                    formData.append('position', position);
-                    formData.append('comment', comment);
-                    formData.append('countOfStars', countOfStars);
-                    formData.append('image', image);
-                    formData.append('relation', relation);
+                formData.append('author', authorTestimonial);
+                formData.append('position', position);
+                formData.append('comment', comment);
+                formData.append('countOfStars', countOfStars);
+                formData.append('image', image);
+                formData.append('relation', relation);
 
-                    await postTestimonial(formData, navigate)
-                }
+                await postTestimonial(formData, navigate)
+
             } catch (error) {
                 console.error('Error creating testimonial:', error);
+                notification.error({
+                    message: 'Error',
+                    description: 'Internal server error',
+                    duration: 3
+                });
             }
         }
     };
 
     const renderForm = () => {
-        if (location.pathname === '/vacancies/add') {
+        if (location.pathname === '/admin/vacancies/add') {
             return (
                 <form onSubmit={handleCreate} className='margin__bottom'>
                     <div className='title__admin'>Vacancies</div>
@@ -146,7 +151,6 @@ export default function Add() {
                             type='text'
                             value={seoUrl}
                             onChange={(e) => setSeoUrl(e.target.value)}
-                            required
                         />
                     </div>
                     <div className='edit__form'>
@@ -211,7 +215,7 @@ export default function Add() {
                     <button className='save__btn' type='submit'>Save</button>
                 </form>
             );
-        } else if (location.pathname === '/articles/add') {
+        } else if (location.pathname === '/admin/articles/add') {
             return (
                 <form onSubmit={handleCreate} className='margin__bottom'>
                     <div className='title__admin'>Articles</div>
@@ -305,12 +309,13 @@ export default function Add() {
                             type='number'
                             value={readTime}
                             onChange={(e) => setReadTime(e.target.value)}
+                            required
                         />
                     </div>
                     <button className='save__btn' type='submit'>Save</button>
                 </form>
             );
-        } else if (location.pathname === '/testimonials/add') {
+        } else if (location.pathname === '/admin/testimonials/add') {
             return (
                 <form onSubmit={handleCreate} className='margin__bottom'>
                     <div className='title__admin'>Testimonials</div>

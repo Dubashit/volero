@@ -6,6 +6,8 @@ import './index.css'
 import ScrollToTopButton from '../../components/scrollToTopButton/ScrollToTopButton'
 import Rotation from '../../components/rotation/Rotation'
 import FeedBack from '../../components/feedBack/FeedBack'
+import { message } from 'antd'
+import useClosable from 'antd/es/_util/hooks/useClosable'
 
 export default function HomePage() {
     const location = useLocation()

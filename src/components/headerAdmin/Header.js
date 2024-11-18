@@ -9,10 +9,10 @@ export default function Header() {
     return (
         <header className='header__admin'>
             <div className='logo__admin'>
-                <img src='/logoWhite.png' alt='logo' onClick={() => navigate('/agents')} />
+                <img src='/logoWhite.png' alt='logo' onClick={() => navigate('/admin/agents')} />
             </div>
             <div className='header__btns__admin'>
-                <button onClick={() => navigate('/changePassword')}><img src='/blackKey.png' alt='change password' /></button>
+                <button onClick={() => navigate('/admin/changePassword')}><img src='/blackKey.png' alt='change password' /></button>
                 <button onClick={() => {
                     navigate('/')
                     localStorage.removeItem('authToken')

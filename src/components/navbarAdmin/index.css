@@ -39,3 +39,8 @@
 .nav__item.active{
     background-color: #7b221c;
 }
+
+.count__agents{
+    width: 50%;
+    text-align: end;
+}

@@ -70,7 +70,7 @@ export default function Edit() {
     }, [location]);
 
     useEffect(() => {
-        if (location.pathname.includes('/articles')) {
+        if (location.pathname.includes('/admin/articles')) {
             getTagsAndRelatedArticles()
         }
     }, [location.pathname, getTagsAndRelatedArticles])
@@ -85,73 +85,61 @@ export default function Edit() {
         setSelectedRelatedArticles(filteredSelected);
     };
 
-    const handleSave = async () => {
-        if (location.pathname.includes('/vacancies/edit')) {
-            if (titleVacancy && statusVacancy && seoTitleVacancy && seoDescriptionVacancy && bodyVacancy && locationVacancy && employmentType) {
-                const formData = new FormData()
+    const handleSave = async (e) => {
+        e.preventDefault()
+        if (location.pathname.includes('/admin/vacancies/edit')) {
+            const formData = new FormData()
 
-                formData.append('title', titleVacancy)
-                formData.append('status', statusVacancy)
-                formData.append('seoUrl', seoUrlVacancy)
-                formData.append('seoTitle', seoTitleArticle)
-                formData.append('seoDescription', seoDescriptionVacancy)
-                formData.append('body', bodyVacancy)
-                formData.append('location', locationVacancy)
-                formData.append('employmentType', employmentType)
+            formData.append('title', titleVacancy)
+            formData.append('status', statusVacancy)
+            formData.append('seoUrl', seoUrlVacancy)
+            formData.append('seoTitle', seoTitleArticle)
+            formData.append('seoDescription', seoDescriptionVacancy)
+            formData.append('body', bodyVacancy)
+            formData.append('location', locationVacancy)
+            formData.append('employmentType', employmentType)
 
-                await putVacancy(formData, navigate, vacancy);
+            await putVacancy(formData, navigate, vacancy);
+        } else if (location.pathname.includes('/admin/articles/edit')) {
+            const formData = new FormData();
+
+            formData.append('title', titleArticle);
+            formData.append('author', author);
+            formData.append('seoUrl', seoUrlArticle);
+            formData.append('seoTitle', seoTitleArticle);
+            formData.append('seoDescription', seoDescriptionArticle);
+            formData.append('tags', JSON.stringify(selectedTags.map(tag => tag.value)));
+            formData.append('relatedArticles', JSON.stringify(selectedRelatedArticles.map(article => article.value)));
+            formData.append('body', bodyArticle);
+            formData.append('status', statusArticle);
+            formData.append('readTime', readTime);
+
+            if (preview && preview !== article.preview) {
+                formData.append('preview', preview);
+                formData.append('oldPreview', article.preview);
             }
-        } else if (location.pathname.includes('/articles/edit')) {
-            if (titleArticle && statusArticle && seoTitleArticle && seoDescriptionArticle && bodyArticle && readTime) {
-                try {
-                    const formData = new FormData();
 
-                    formData.append('title', titleArticle);
-                    formData.append('author', author);
-                    formData.append('seoUrl', seoUrlArticle);
-                    formData.append('seoTitle', seoTitleArticle);
-                    formData.append('seoDescription', seoDescriptionArticle);
-                    formData.append('tags', JSON.stringify(selectedTags.map(tag => tag.value)));
-                    formData.append('relatedArticles', JSON.stringify(selectedRelatedArticles.map(article => article.value)));
-                    formData.append('body', bodyArticle);
-                    formData.append('status', statusArticle);
-                    formData.append('readTime', readTime);
+            await putArticle(formData, navigate, article)
+        } else if (location.pathname.includes('/admin/testimonials/edit')) {
+            const formData = new FormData();
 
-                    if (preview && preview !== article.preview) {
-                        formData.append('preview', preview);
-                        formData.append('oldPreview', article.preview);
-                    }
+            formData.append('author', authorTestimonial);
+            formData.append('position', position);
+            formData.append('comment', comment);
+            formData.append('countOfStars', countOfStars);
+            formData.append('relation', relation);
 
-                    await putArticle(formData, navigate, article)
-                } catch (error) {
-                    console.error('Error updating article:', error);
-                }
+            if (image && image !== testimonial.image) {
+                formData.append('image', image);
+                formData.append('oldImage', testimonial.image);
             }
-        } else if (location.pathname.includes('/testimonials/edit')) {
-            if (authorTestimonial && position && comment && countOfStars && image) {
-                try {
-                    const formData = new FormData();
 
-                    formData.append('author', authorTestimonial);
-                    formData.append('position', position);
-                    formData.append('comment', comment);
-                    formData.append('countOfStars', countOfStars);
-
-                    if (image && image !== testimonial.image) {
-                        formData.append('image', image);
-                        formData.append('oldImage', testimonial.image);
-                    }
-
-                    await putTestimonial(formData, navigate, testimonial);
-                } catch (error) {
-                    console.error('Error updating testimonial:', error);
-                }
-            }
+            await putTestimonial(formData, navigate, testimonial);
         }
     }
 
     const renderForm = () => {
-        if (location.pathname.includes('/vacancies/edit')) {
+        if (location.pathname.includes('/admin/vacancies/edit')) {
             return (
                 <form onSubmit={handleSave} className='margin__bottom'>
                     <div className='title__admin'>Vacancies</div>
@@ -235,7 +223,7 @@ export default function Edit() {
                     <button className='save__btn' type='submit'>Save</button>
                 </form>
             )
-        } else if (location.pathname.includes('/articles/edit')) {
+        } else if (location.pathname.includes('/admin/articles/edit')) {
             return (
                 <form onSubmit={handleSave} className='margin__bottom'>
                     <div className='title__admin'>Articles</div>
@@ -340,7 +328,7 @@ export default function Edit() {
                     <button className='save__btn' type='submit'>Save</button>
                 </form>
             )
-        } else if (location.pathname.includes('/testimonials/edit')) {
+        } else if (location.pathname.includes('/admin/testimonials/edit')) {
             return (
                 <form onSubmit={handleSave} className='margin__bottom'>
                     <div className='title__admin'>Testimonials</div>
@@ -401,7 +389,7 @@ export default function Edit() {
                         <div className='subtitle__admin'>Author image</div>
                         <FileUpload onFileSelect={setImage} isEditPage={true} item={testimonial} />
                     </div>
-                    <button className='save__btn'type='submit'>Save</button>
+                    <button className='save__btn' type='submit'>Save</button>
                 </form>
             );
         } else {

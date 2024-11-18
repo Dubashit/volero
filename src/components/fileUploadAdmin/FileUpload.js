@@ -29,7 +29,7 @@ export default function FileUpload({ onFileSelect, isEditPage, item }) {
                 ref={filePicker}
                 type='file'
                 onChange={handleChange}
-                accept='.jpeg, .png, .jpg, .gif, .web'
+                accept='.jpeg, .png, .jpg, .gif, .webp'
                 style={{ display: 'none' }}
                 required
             />
@@ -42,13 +42,13 @@ export default function FileUpload({ onFileSelect, isEditPage, item }) {
                 </div>
             )}
 
-            {isEditPage && location.pathname.includes('/articles/edit') && (
+            {isEditPage && location.pathname.includes('/admin/articles/edit') && (
                 <div className='image__viewer'>
                     {getPicture(item.preview)}
                 </div>
             )}
 
-            {isEditPage && location.pathname.includes('/testimonials/edit') && (
+            {isEditPage && location.pathname.includes('/admin/testimonials/edit') && (
                 <div className='image__viewer'>
                     {getPicture(item.image)}
                 </div>

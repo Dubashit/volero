@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './index.css';
 import { useLocation } from 'react-router-dom';
-import { putCoefficient, putLanguages, putStopList, putTags } from '../../api';
+import { putCoefficient, putLanguage, putStopList, putTag } from '../../api';
+import { notification } from 'antd';
 
 export default function EditModal({ item, closeModal, refreshItems }) {
 
@@ -15,39 +16,97 @@ export default function EditModal({ item, closeModal, refreshItems }) {
     const [salesIdStopList, setSalesIdStopList] = useState(item.salesId)
     const [usernameStopList, setUsernameStopList] = useState(item.username)
 
-    const handleSave = async () => {
-        try {
-            if (location.pathname === '/coefficients') {
-                if (salesIdCoef === '') { return alert('Sales ID is null') }
-                if (percentage === '') { return alert('Percentage is null') }
-                await putCoefficient(item, salesIdCoef, percentage);
-                refreshItems();
-                closeModal();
-            } else if (location.pathname === '/tags') {
-                if (titleTag === '') { return alert('Title is null') }
-                await putTags(item, titleTag);
-                refreshItems();
-                closeModal();
-            } else if (location.pathname === '/languages') {
-                if (code === '') { return alert('Code is null') }
-                if (titleLanguage === '') { return alert('Title is null') }
-                await putLanguages(code, titleLanguage);
-                refreshItems();
-                closeModal();
-            } else if (location.pathname === '/stopList') {
-                if (salesIdStopList === '') { return alert('Sales ID is null') }
-                if (usernameStopList === '') { return alert('Username is null') }
-                await putStopList(item, salesIdStopList, usernameStopList)
-                refreshItems();
-                closeModal();
+    const handleSave = async (e) => {
+        e.preventDefault()
+        if (location.pathname === '/admin/coefficients') {
+            try {
+                const res = await putCoefficient(item, salesIdCoef, percentage)
+                if (res.status === 200) {
+                    notification.success({
+                        message: 'Successful',
+                        description: 'Updating of coefficient successfully',
+                        duration: 3
+                    });
+                    refreshItems();
+                    closeModal();
+                }
+            } catch (error) {
+                if (error.status === 500) {
+                    notification.error({
+                        message: 'Error',
+                        description: 'The server is not responding',
+                        duration: 3
+                    });
+                }
             }
-        } catch (error) {
-            console.error('Error updating item:', error);
+        } else if (location.pathname === '/admin/tags') {
+            try {
+                const res = await putTag(item, titleTag);
+                if (res.status === 200) {
+                    notification.success({
+                        message: 'Successful',
+                        description: 'Updating of tag successfully',
+                        duration: 3
+                    });
+                    refreshItems();
+                    closeModal();
+                }
+            } catch (error) {
+                if (error.status === 500) {
+                    notification.error({
+                        message: 'Error',
+                        description: 'The server is not responding',
+                        duration: 3
+                    });
+                }
+            }
+        } else if (location.pathname === '/admin/languages') {
+            try {
+                const res = await putLanguage(item, code, titleLanguage);
+                if (res.status === 200) {
+                    notification.success({
+                        message: 'Successful',
+                        description: 'Updating of language successfully',
+                        duration: 3
+                    });
+                    refreshItems();
+                    closeModal();
+                }
+            } catch (error) {
+                if (error.status === 500) {
+                    notification.error({
+                        message: 'Error',
+                        description: 'The server is not responding',
+                        duration: 3
+                    });
+                }
+            }
+        } else if (location.pathname === '/admin/stopList') {
+            try {
+                const res = await putStopList(item, salesIdStopList, usernameStopList)
+                if (res.status === 200) {
+                    notification.success({
+                        message: 'Successful',
+                        description: 'Updating of stop list successfully',
+                        duration: 3
+                    });
+                    refreshItems();
+                    closeModal();
+                }
+            } catch (error) {
+                if (error.status === 500) {
+                    notification.error({
+                        message: 'Error',
+                        description: 'The server is not responding',
+                        duration: 3
+                    });
+                }
+            }
         }
     };
 
     const renderForm = () => {
-        if (location.pathname === '/coefficients') {
+        if (location.pathname === '/admin/coefficients') {
             return (
                 <div className="modal__content">
                     <span className="close" onClick={closeModal}>&times;</span>
@@ -75,7 +134,7 @@ export default function EditModal({ item, closeModal, refreshItems }) {
                     </form>
                 </div>
             )
-        } else if (location.pathname === '/tags') {
+        } else if (location.pathname === '/admin/tags') {
             return (
                 <div className="modal__content">
                     <span className="close" onClick={closeModal}>&times;</span>
@@ -94,7 +153,7 @@ export default function EditModal({ item, closeModal, refreshItems }) {
                     </form>
                 </div>
             )
-        } else if (location.pathname === '/languages') {
+        } else if (location.pathname === '/admin/languages') {
             return (
                 <div className="modal__content">
                     <span className="close" onClick={closeModal}>&times;</span>
@@ -122,7 +181,7 @@ export default function EditModal({ item, closeModal, refreshItems }) {
                     </form>
                 </div>
             )
-        } else if (location.pathname === '/stopList') {
+        } else if (location.pathname === '/admin/stopList') {
             return (
                 <div className="modal__content">
                     <span className="close" onClick={closeModal}>&times;</span>
