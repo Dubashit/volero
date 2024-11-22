@@ -121,7 +121,7 @@ export default function AgentsPage() {
                                     <td>{agent.reseller}</td>
                                     <td>{agent.salesId}</td>
                                     <td>{agent.username}</td>
-                                    <td>{agent.fullName}</td>
+                                    <td>{agent.name}</td>
                                     <td>{agent.email}</td>
                                     <td>{parseFloat(agent.usd).toFixed(2)}</td>
                                     <td>{parseFloat(agent.eur).toFixed(2)}</td>

@@ -3,7 +3,7 @@ import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import './index.css'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getUserFromLoyalty, postAuth, postLoginMain } from '../../api';
+import { getUserFromLoyalty, postAuth, postLoginMain, refreshDataInTablesAgentsAndBookings } from '../../api';
 import { notification } from 'antd';
 import axios from 'axios';
 
@@ -48,12 +48,12 @@ export default function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        const tokenUrl = 'https://www.volero.net/reseller/oauth2/token';
-        const formUrl = 'https://www.volero.net/reseller/oauth2/authorize';
-        const redirectUrl = 'https://www.volero.net/reseller/home/';
+        const tokenUrl = 'https://www.volero.net/_test/reseller/oauth2/token';
+        const formUrl = 'https://www.volero.net/_test/reseller/oauth2/authorize';
+        const redirectUrl = 'https://www.volero.net/_test/reseller/home/';
 
-        const clientId = 'a3e3fea730714437a5c0d30937d590cc';
-        const clientSecret = '0dc5156575814fe1a783134c27e34ae8';
+        const clientId = '';
+        const clientSecret = '';
 
         const loginData = {
             salesId: salesId,
@@ -71,17 +71,17 @@ export default function LoginPage() {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
             });
-    
+
             const accessToken = tokenResponse.data.access_token;
             console.log('Access Token:', accessToken);
-    
+
             const response = await axios.post(formUrl, loginData, {
                 headers: {
-                    'Authorization': `Bearer ${accessToken}`,
+                    'Authorization': `${accessToken}`,
                     'Content-Type': 'application/json',
                 },
             });
-    
+
             if (response.status === 200) {
                 console.log('Login successful! Redirecting...');
                 window.open(redirectUrl, '_blank');
@@ -97,29 +97,57 @@ export default function LoginPage() {
     const handleLoginLoyalty = async (e) => {
         e.preventDefault();
 
-        // const formData = new URLSearchParams();
-        // formData.append('resellerCode', salesId);
-        // formData.append('username', salesId);
-        // formData.append('password', username);
-        // formData.append('action', 'login');
+        const tokenUrl = 'https://volero.net/_test/admin/oauth2/token';
+        const reservationsUrl = 'https://volero.net/_test/admin/api/reservationsApi/v1/reservations';
 
-        // const loginInIrix = await axios.post('https://185.131.222.183/_test/admin/auth/', formData, {
-        //     headers: {
-        //         'Content-Type': 'application/x-www-form-urlencoded',
-        //     },
-        // });
-        // if(loginInIrix){
-        //     console.log("loh");
+        const clientId = '542483657c004d99b37a0024ed83db05';
+        const clientSecret = 'b74b70ae551a4a3fab1e9c0e3261a1e0';
 
-        // }
-        // console.log(loginInIrix.data);
+        try {
+            let accessToken = localStorage.getItem('accessTokenIrixAdmin');            
+            if(!accessToken){
+                console.log('No token found, requesting a new one...');
+                const tokenResponse = await axios.post(tokenUrl, new URLSearchParams({
+                    grant_type: 'client_credentials',
+                    client_id: clientId,
+                    client_secret: clientSecret,
+                    scope: 'read:reservations',
+                }), {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                });
+    
+                const accessToken = tokenResponse.data.access_token;
+                localStorage.setItem('accessTokenIrixAdmin', accessToken)
+                console.log('New token created and saved:', localStorage.getItem('accessTokenIrixAdmin'));
+            } else {
+                console.log('Using existing token from localStorage:', accessToken);
+            }
 
+            const reservationsResponse = await axios.get(reservationsUrl, {
+                headers: {
+                    'Authorization': `${accessToken}`,
+                },
+            });
+
+            console.log(accessToken);
+            
+
+            if (reservationsResponse.status === 200) {                
+                refreshDataInTablesAgentsAndBookings(reservationsResponse)
+            } else {
+                console.log('Error');
+            }
+        } catch (error) {
+            console.error('Error during authorization or fetching reservations:', error.response?.data || error.message);
+            return null;
+        }
 
         const responce = await postAuth(salesId, username)
 
         if (responce.data.access_token) {
             navigate('/admin/agents')
-
         } else {
             const response = await getUserFromLoyalty(salesId, username);
 

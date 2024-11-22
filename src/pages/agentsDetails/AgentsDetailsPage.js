@@ -88,7 +88,6 @@ export default function AgentsDetailsPage() {
           duration: 3
         });
         setIsEditingEmail(false);
-        window.location.reload()
       } else {
         notification.error({
           message: 'Error',
@@ -148,7 +147,7 @@ export default function AgentsDetailsPage() {
                       {agent?.email}
                     </div>
                   )}
-                  {email === '' && (
+                  {email === null || email === '' && (
                     <div className="resume__field__email resume__field" onClick={enterEmailValue}>
                       Empty
                     </div>
@@ -158,7 +157,7 @@ export default function AgentsDetailsPage() {
             </div>
             <div className='resume__detail__item'>
               <div className='subtitle__admin request__title'>Full name :</div>
-              <div className='resume__field'>{agent?.fullName}</div>
+              <div className='resume__field'>{agent?.name}</div>
             </div>
           </div>
           <div className='agent__money'>

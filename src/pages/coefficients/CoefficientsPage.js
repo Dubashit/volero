@@ -1,111 +1,163 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../components/header/Header';
-import Footer from '../../components/footer/Footer';
-import ScrollToTopButton from '../../components/scrollToTopButton/ScrollToTopButton';
-import { useLocation } from 'react-router-dom';
 import './index.css';
-import ModalForm from '../../components/modalForm/ModalForm';
-import { getUserBookings } from '../../api';
-import { Pagination } from 'antd';
+import { useLocation } from 'react-router-dom';
+import Filter from '../../components/filter/Filter';
+import EditModal from '../../components/editModal/EditModal';
+import AddModal from '../../components/addModal/AddModal';
+import { deleteCoefficient, getCoefficients } from '../../api';
+import { notification, Pagination } from 'antd';
 
-export default function PointsPage() {
+export default function CoefficientsPage() {
     const location = useLocation();
-    const agent = location.state?.agent;
-    console.log(agent);
-
-    const [filteredBookings, setFilteredBookings] = useState([]);
+    const [filteredCoefficients, setFilteredCoefficients] = useState([]);
+    const [selectedCoefficient, setSelectedCoefficient] = useState(null);
     const [noResults, setNoResults] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(20);
+    const [pageSize, setPageSize] = useState(10);
 
-    const fetchBookingsForUser = async () => {
+    useEffect(() => {
+        document.querySelector('.main__content__admin').scrollTo(0, 0);
+        fetchCoefficients();
+    }, [location]);
+
+    const fetchCoefficients = async () => {
         try {
-            await getUserBookings(setFilteredBookings, agent);
+            await getCoefficients(setFilteredCoefficients);
             setLoading(false);
             setNoResults(false);
         } catch (error) {
-            setError('Failed to fetch data');
+            setError('Failed to fetch coefficients');
             setLoading(false);
         }
     };
 
-    useEffect(() => {
-        fetchBookingsForUser();
-    }, [location]);
+    const deleteData = async (id) => {
+        try {
+            const response = await deleteCoefficient(id);
+            if (response.status === 200 || response.status === 204) {
+                notification.success({
+                    message: 'Successful',
+                    description: 'Coefficient has been deleted',
+                    duration: 3,
+                });
+                fetchCoefficients();
+            } else {
+                console.error('Failed to delete coefficient:', response);
+                notification.error({
+                    message: 'Error',
+                    description: 'Failed to delete coefficient',
+                    duration: 3,
+                });
+            }
+        } catch (error) {
+            console.error('Error deleting coefficient:', error);
+            notification.error({
+                message: 'Error',
+                description: 'The server is not responding',
+                duration: 3,
+            });
+        }
+    };
 
-    const totalItems = filteredBookings.length;
-    const indexOfLastItem = currentPage * pageSize;
-    const indexOfFirstItem = indexOfLastItem - pageSize;
-    const currentItems = filteredBookings.slice(indexOfFirstItem, indexOfLastItem);
+    const editData = (coefficient) => {
+        setSelectedCoefficient(coefficient);
+        setIsEditModalOpen(true);
+    };
 
     const onPageChange = (page, size) => {
         setCurrentPage(page);
         setPageSize(size);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelector('.main__content__admin').scrollTo(0, 0);
     };
 
+    const paginatedCoefficients = filteredCoefficients.slice(
+        (currentPage - 1) * pageSize,
+        currentPage * pageSize
+    );
+
     return (
-        <div>
-            <Header />
-            <div className='main'>
-                <div className='gray__background'>
-                    <div className='container'>
-                        <div className='points__first__block'>
-                            <div className='title'>Welcome, {agent?.fullName}</div>
-                            <p>You have {parseFloat(agent?.usd).toFixed(2)} USD, {parseFloat(agent?.eur).toFixed(2)} EUR, {parseFloat(agent?.gbp).toFixed(2)} GBP points available.</p>
-                            <p>You have made {totalItems} reservation(s).</p>
-                            <p>You can spend your loyalty points on hotel bookings, please <span onClick={() => setIsModalOpen(true)}>contact us</span> or your account manager directly.</p>
-                        </div>
-                        <div className='point__second__block'>
-                            {loading && <p>Loading...</p>}
-                            {error && <p>{error}</p>}
-                            {noResults && !loading && <p>No requests found.</p>}
-                            {!loading && !error && !noResults && (
-                                <>
-                                    <table className='point__table'>
-                                        <thead>
-                                            <tr>
-                                                <th className='list__title'>Booking ID</th>
-                                                <th className='list__title'>Total value</th>
-                                                <th className='list__title'>Points awarded</th>
-                                                <th className='list__title'>Currency</th>
-                                                <th className='list__title'>Expiry date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {currentItems.map((item, index) => (
-                                                <tr key={index}>
-                                                    <td>{item.id}</td>
-                                                    <td>{item.sellingPrice}</td>
-                                                    <td>{item.pointsCollected}</td>
-                                                    <td>{item.currency}</td>
-                                                    <td>{new Date(item.expireDate).toISOString().substring(0, 10)}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                    <Pagination
-                                        showQuickJumper
-                                        current={currentPage}
-                                        pageSize={pageSize}
-                                        total={totalItems}
-                                        onChange={onPageChange}
-                                        showSizeChanger
-                                        pageSizeOptions={['5', '10', '20', '50']}
-                                    />
-                                </>
-                            )}
-                            <ModalForm show={isModalOpen} onClose={() => setIsModalOpen(false)} />
-                        </div>
-                    </div>
-                </div>
+        <div className="all__content__admin">
+            <div className="title__admin">Coefficients</div>
+            <div className="add__btn__block">
+                <button className="add__btn" onClick={() => setIsAddModalOpen(true)}>
+                    + Add
+                </button>
             </div>
-            <Footer />
-            <ScrollToTopButton />
+            <Filter
+                setFilteredItems={(filtered) => {
+                    setFilteredCoefficients(filtered);
+                    setNoResults(filtered.length === 0);
+                }}
+                refreshData={fetchCoefficients}
+            />
+            <div className="content__block__admin">
+                {loading && <p>Loading...</p>}
+                {error && <p>{error}</p>}
+                {noResults && !loading && <p>No coefficients found.</p>}
+                {!loading && !error && !noResults && (
+                    <table className="coefficients__list">
+                        <thead>
+                            <tr>
+                                <th className="list__title__admin">Sales ID</th>
+                                <th className="list__title__admin">Percentage</th>
+                                <th className="list__title__admin">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {paginatedCoefficients.map((coefficient) => (
+                                <tr className="coefficient__item" key={coefficient.id}>
+                                    <td>{coefficient.salesId}</td>
+                                    <td>{coefficient.percentage}</td>
+                                    <td className="coefficient__actions">
+                                        <button
+                                            className="edit__btn"
+                                            onClick={() => editData(coefficient)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className="delete__btn"
+                                            onClick={() => deleteData(coefficient.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
+            </div>
+            <Pagination
+                showQuickJumper
+                current={currentPage}
+                pageSize={pageSize}
+                total={filteredCoefficients.length}
+                onChange={onPageChange}
+                showSizeChanger
+                align="center"
+                pageSizeOptions={['5', '10', '20', '50']}
+            />
+
+            {isAddModalOpen && (
+                <AddModal
+                    closeModal={() => setIsAddModalOpen(false)}
+                    refreshItems={fetchCoefficients}
+                />
+            )}
+
+            {isEditModalOpen && (
+                <EditModal
+                    item={selectedCoefficient}
+                    closeModal={() => setIsEditModalOpen(false)}
+                    refreshItems={fetchCoefficients}
+                />
+            )}
         </div>
     );
 }

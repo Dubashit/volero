@@ -2,21 +2,6 @@ import axios from "axios";
 import { API_URL, PUBLIC_URL } from "./config";
 import { notification } from 'antd'
 
-// export const exampleQuerry = async () => {
-//     try {
-//         const response = await axios.get("https://www.volero.net/reseller/api/reservationsApi/v1/reservations")
-//         console.log(response);
-//         console.log(response.data);
-//     } catch (error) {
-//         console.error(error);
-//         notification.error({
-//             message: 'Error',
-//             description: 'The server is not responding',
-//             duration: 3
-//         });
-//     }
-// }
-
 export const getTags = async () => {
     try {
         const response = await axios.get(`${API_URL}/tags`);
@@ -143,6 +128,48 @@ export const getUserFromLoyalty = async (salesId, username) => {
     }
 };
 
+export const refreshDataInTablesAgentsAndBookings = async (reservationsResponse) => {
+    const reservations = reservationsResponse.data._embedded.reservation;
+    try {
+        await Promise.all(
+            reservations.map(async (reservation) => {
+                const agentData = {
+                    id: reservation.agent?.id || null,
+                    reseller: reservation.reseller?.id || null,
+                    salesId: reservation.reseller?.code || null,
+                    username: reservation.agent?.username || null,
+                    email: reservation.agent?.email || null,
+                    name: reservation.agent?.name || null,
+                };
+
+                const bookingData = {
+                    id: reservation.id || null,
+                    userId: reservation.agent?.id || null,
+                    sellingPrice: reservation.service?.prices?.total?.net?.value || null,
+                    currency: reservation.service?.prices?.total?.net?.currency || null,
+                };
+
+                await axios.post(`${API_URL}/agents`, agentData);
+                await axios.post(`${API_URL}/bookings`, bookingData);
+            })
+        );
+
+        return notification.success({
+            message: 'Successful',
+            description: 'New data has been saved',
+            duration: 3,
+        });
+    } catch (error) {
+        console.error('Error processing reservations:', error);
+
+        return notification.error({
+            message: 'Error',
+            description: 'Failed to save all data',
+            duration: 3,
+        });
+    }
+}
+
 
 
 
@@ -159,13 +186,13 @@ export const getUserFromLoyalty = async (salesId, username) => {
 
 export const postAuth = async (salesId, username) => {
     try {
-        const responce = await axios.post(`${API_URL}/auth/token`, {
+        const response = await axios.post(`${API_URL}/auth/token`, {
             username: salesId,
             password: username
         })
-        localStorage.setItem('authToken', JSON.stringify(responce.data.access_token))
+        localStorage.setItem('authToken', JSON.stringify(response.data.access_token))
         localStorage.setItem('username', salesId)
-        return responce
+        return response
     } catch (error) {
         console.error(error)
         notification.error({
