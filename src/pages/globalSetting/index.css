@@ -46,8 +46,3 @@
 .submit__btn:hover {
     background-color: #4f46e5;
 }
-
-.form__group label::after {
-    content: " *";
-    color: red;
-}

@@ -53,14 +53,14 @@
     padding: 0 20px 0 0;
 }
 
-.form__group label {
+.form__group>label {
     display: block;
     margin-bottom: 8px;
     font-size: 16px;
     font-weight: 300;
 }
 
-.form__group input {
+.form__group>input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -85,7 +85,7 @@
     background-color: #16a34a;
 }
 
-.form__group label::after {
+.form__group>label::after {
     content: " *";
     color: red;
 }
@@ -95,4 +95,8 @@
     padding: 10px;
     box-sizing: border-box;
     height: 100px;
+}
+
+.form__group__optional>label::after{
+    content: " ";
 }

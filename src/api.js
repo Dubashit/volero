@@ -115,16 +115,34 @@ export const getTestimonials = async (relation) => {
 
 export const getUserFromLoyalty = async (salesId, username) => {
     try {
-        return await axios.get(`${API_URL}/agents/pointsData/${username}/${salesId}`)
+        const response = await axios.get(`${API_URL}/stopList/searchStopList`, {
+            params: { salesId, username }
+        });
+
+        const { isBlocked, reason } = response.data;
+
+        if (isBlocked) {
+            notification.error({
+                message: 'Access Denied',
+                description: reason || 'Your actions with the loyalty program are blocked',
+                duration: 3
+            });
+            return undefined;
+        }
+
+        return await axios.get(`${API_URL}/agents/pointsData/${username}/${salesId}`);
+
     } catch (error) {
-        console.error(error);
+        console.error('Error in getUserFromLoyalty:', error);
         notification.error({
             message: 'Error',
             description: 'The server is not responding',
             duration: 3
         });
+        return undefined;
     }
-}
+};
+
 
 
 
@@ -165,7 +183,7 @@ export const postResume = async (formData, navigate) => {
                 'Content-Type': 'multipart/form-data',
             },
         });
-        if(res.status === 200 || res.status === 204){
+        if (res.status === 200 || res.status === 204) {
             notification.success({
                 message: 'Successful',
                 description: 'Form submitted successfully!',
@@ -221,11 +239,19 @@ export const postRequestRegister = async (formData, navigate) => {
 
 export const postRequestForPoints = async (formData, onClose) => {
     try {
+
+        formData.forEach(element => {
+            console.log(element);
+        });
+
         const response = await axios.post(`${API_URL}/requestForPoints`, formData, {
             headers: {
                 'Content-Type': 'application/json',
             },
         });
+
+        console.log(response.data);
+
 
         if (response.status === 200) {
             notification.success({
@@ -420,8 +446,8 @@ export const getAgent = async (agent) => {
 }
 
 export const getUserBookings = async (setFilteredBookings, agent) => {
-    const response = await axios.get(`${API_URL}/bookings/userId/${agent?.id}`);
-    setFilteredBookings(response.data);
+    const bookings = await axios.get(`${API_URL}/bookings/userId/${agent?.id}`);
+    setFilteredBookings(bookings.data);
 }
 
 export const getUserRewards = async (setFilteredRewards, agent) => {
@@ -429,6 +455,10 @@ export const getUserRewards = async (setFilteredRewards, agent) => {
     setFilteredRewards(response.data);
 }
 
+export const getGlobalSetting = async () => {
+    const response = await axios.get(`${API_URL}/globalSetting`)
+    return response.data
+}
 
 
 
@@ -438,6 +468,13 @@ export const getUserRewards = async (setFilteredRewards, agent) => {
 
 
 
+
+
+export const postGlobalSetting = async (percentage, days) => {
+    const response = await axios.post(`${API_URL}/globalSetting`, { percentage, days })
+    console.log(response);
+    return response.data
+}
 
 export const postVacancy = async (formData, navigate) => {
     const response = await axios.post(`${API_URL}/vacancies`, formData, {
@@ -695,7 +732,7 @@ export const putRequestForPoints = async (id, data) => {
 export const searchTags = async (titleTag, setFilteredItems) => {
     try {
         const response = await axios.get(`${API_URL}/tags?title=${titleTag}`);
-        if(response.status === 200){
+        if (response.status === 200) {
             setFilteredItems(response.data)
             notification.success({
                 message: 'OK',
@@ -722,7 +759,7 @@ export const searchTags = async (titleTag, setFilteredItems) => {
 export const searchCoefficients = async (salesIdCoef, percentage, setFilteredItems) => {
     try {
         const response = await axios.get(`${API_URL}/coefficients/search?salesId=${salesIdCoef}&percentage=${percentage}`);
-        if(response.status === 200){
+        if (response.status === 200) {
             setFilteredItems(response.data)
             notification.success({
                 message: 'OK',
@@ -749,7 +786,7 @@ export const searchCoefficients = async (salesIdCoef, percentage, setFilteredIte
 export const searchLanguages = async (code, titleLanguage, setFilteredItems) => {
     try {
         const response = await axios.get(`${API_URL}/languages/search?code=${code}&title=${titleLanguage}`)
-        if(response.status === 200){
+        if (response.status === 200) {
             setFilteredItems(response.data)
             notification.success({
                 message: 'OK',
@@ -776,7 +813,7 @@ export const searchLanguages = async (code, titleLanguage, setFilteredItems) => 
 export const searchStopList = async (salesIdStopList, usernameStopList, setFilteredItems) => {
     try {
         const response = await axios.get(`${API_URL}/stopList/search?salesId=${salesIdStopList}&username=${usernameStopList}`)
-        if(response.status === 200){
+        if (response.status === 200) {
             setFilteredItems(response.data)
             notification.success({
                 message: 'OK',
@@ -803,7 +840,7 @@ export const searchStopList = async (salesIdStopList, usernameStopList, setFilte
 export const searchVacancies = async (titleVacancy, statusVacancy, setFilteredItems) => {
     try {
         const response = await axios.get(`${API_URL}/vacancies/search?title=${titleVacancy}&status=${statusVacancy}`)
-        if(response.status === 200){
+        if (response.status === 200) {
             setFilteredItems(response.data)
             notification.success({
                 message: 'OK',
@@ -839,7 +876,7 @@ export const searchResume = async (nameResume, startDate, endDate, setFilteredIt
         }
 
         const response = await axios.get(url);
-        if(response.status === 200){
+        if (response.status === 200) {
             setFilteredItems(response.data)
             notification.success({
                 message: 'OK',
@@ -866,7 +903,7 @@ export const searchResume = async (nameResume, startDate, endDate, setFilteredIt
 export const searchArticles = async (titleArticle, statusArticle, setFilteredItems) => {
     try {
         const response = await axios.get(`${API_URL}/articles/search?title=${titleArticle || ''}&status=${statusArticle || ''}`)
-        if(response.status === 200){
+        if (response.status === 200) {
             setFilteredItems(response.data)
             notification.success({
                 message: 'OK',
@@ -893,7 +930,7 @@ export const searchArticles = async (titleArticle, statusArticle, setFilteredIte
 export const searchTestimonials = async (author, position, countOfStars, setFilteredItems) => {
     try {
         const response = await axios.get(`${API_URL}/testimonials/search?author=${author}&position=${position}&countOfStars=${countOfStars}`)
-        if(response.status === 200){
+        if (response.status === 200) {
             setFilteredItems(response.data)
             notification.success({
                 message: 'OK',
@@ -929,7 +966,7 @@ export const searchRequestRegister = async (firstName, lastName, startDate, endD
         }
 
         const response = await axios.get(url);
-        if(response.status === 200){
+        if (response.status === 200) {
             setFilteredItems(response.data)
             notification.success({
                 message: 'OK',
@@ -965,7 +1002,7 @@ export const searchRequestForPoints = async (usernameRequestForPoints, email, st
         }
 
         const response = await axios.get(url);
-        if(response.status === 200){
+        if (response.status === 200) {
             setFilteredItems(response.data)
             notification.success({
                 message: 'OK',
@@ -992,7 +1029,7 @@ export const searchRequestForPoints = async (usernameRequestForPoints, email, st
 export const searchAgents = async (reseller, salesIdAgent, usernameAgent, setFilteredItems) => {
     try {
         const response = await axios.get(`${API_URL}/agents/search?reseller=${reseller || ''}&salesId=${salesIdAgent || ''}&username=${usernameAgent || ''}`)
-        if(response.status === 200){
+        if (response.status === 200) {
             setFilteredItems(response.data)
             notification.success({
                 message: 'OK',

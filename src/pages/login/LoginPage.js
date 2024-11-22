@@ -48,13 +48,50 @@ export default function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        const data = {
-            resellerCode: salesId,
+        const tokenUrl = 'https://www.volero.net/reseller/oauth2/token';
+        const formUrl = 'https://www.volero.net/reseller/oauth2/authorize';
+        const redirectUrl = 'https://www.volero.net/reseller/home/';
+
+        const clientId = 'a3e3fea730714437a5c0d30937d590cc';
+        const clientSecret = '0dc5156575814fe1a783134c27e34ae8';
+
+        const loginData = {
+            salesId: salesId,
             username: username,
-            password: password
+            password: password,
         };
 
-        await postLoginMain(data);
+        try {
+            const tokenResponse = await axios.post(tokenUrl, new URLSearchParams({
+                grant_type: 'client_credentials',
+                client_id: clientId,
+                client_secret: clientSecret,
+            }), {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            });
+    
+            const accessToken = tokenResponse.data.access_token;
+            console.log('Access Token:', accessToken);
+    
+            const response = await axios.post(formUrl, loginData, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (response.status === 200) {
+                console.log('Login successful! Redirecting...');
+                window.open(redirectUrl, '_blank');
+            } else {
+                console.error('Login failed:', response.status, response.data);
+            }
+        } catch (error) {
+            console.error('Error during authentication:', error.response?.data || error.message);
+        }
+        // await postLoginMain(data);
     }
 
     const handleLoginLoyalty = async (e) => {
@@ -73,18 +110,18 @@ export default function LoginPage() {
         // });
         // if(loginInIrix){
         //     console.log("loh");
-            
+
         // }
         // console.log(loginInIrix.data);
-        
+
 
         const responce = await postAuth(salesId, username)
 
         if (responce.data.access_token) {
             navigate('/admin/agents')
-            // window.location.reload();
+
         } else {
-            const response = await getUserFromLoyalty(salesId, username)
+            const response = await getUserFromLoyalty(salesId, username);
 
             if (response !== undefined) {
                 notification.success({
@@ -92,11 +129,13 @@ export default function LoginPage() {
                     description: 'You have successfully logged into the loyalty system!',
                     duration: 3
                 });
-                navigate(`/points/${response.data.salesId}/${response.data.username}/${response.data.id}`, { state: { agent: response.data } })
+                navigate(`/points/${response.data.salesId}/${response.data.username}/${response.data.id}`, {
+                    state: { agent: response.data }
+                });
             } else {
                 notification.error({
                     message: 'Error',
-                    description: 'Agent not found',
+                    description: 'Agent not found or blocked',
                     duration: 3
                 });
             }

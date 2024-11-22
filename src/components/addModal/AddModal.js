@@ -247,12 +247,11 @@ export default function AddModal({ userId, closeModal, refreshItems }) {
                                 required
                             />
                         </div>
-                        <div className="form__group">
+                        <div className="form__group form__group__optional">
                             <label>Username</label>
                             <input
                                 type="text"
                                 onChange={(e) => setUsernameStopList(e.target.value)}
-                                required
                             />
                         </div>
                         <button type="submit" className="save__button">Save</button>

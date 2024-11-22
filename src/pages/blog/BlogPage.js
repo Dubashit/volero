@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './index.css';
 import { format } from 'date-fns';
 import { getArticlesPreview, getBlogs, getTags } from '../../api';
+import { Pagination } from 'antd'; // Импорт Pagination из antd
 
 export default function BlogPage() {
 
@@ -22,7 +23,7 @@ export default function BlogPage() {
     }, []);
 
     const location = useLocation();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [tags, setTags] = useState([]);
     const [blogs, setBlogs] = useState([]);
@@ -31,10 +32,9 @@ export default function BlogPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [blogsPerPage, setBlogsPerPage] = useState(6);
 
-
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = 'Volerò - Blog'
+        document.title = 'Volerò - Blog';
         handleFetchTags();
         handleFetchArticles();
     }, [location]);
@@ -57,7 +57,6 @@ export default function BlogPage() {
     const handleFetchTags = async () => {
         const fetchedTags = await getTags();
         console.log(fetchedTags);
-        
         setTags(fetchedTags);
     };
 
@@ -66,11 +65,11 @@ export default function BlogPage() {
         console.log(fetchArticles);
         setBlogs(fetchArticles);
         setFilteredBlogs(fetchArticles);
-    }
+    };
 
     const handleTagClick = (tagId) => {
         if (activeTags.includes(tagId)) {
-            const newActiveTags = activeTags.filter(id => id !== tagId);
+            const newActiveTags = activeTags.filter((id) => id !== tagId);
             setActiveTags(newActiveTags);
             filterBlogs(newActiveTags);
         } else {
@@ -84,8 +83,8 @@ export default function BlogPage() {
         if (activeTags.length === 0) {
             setFilteredBlogs(blogs);
         } else {
-            const filtered = blogs.filter(blog => {
-                return blog.tags.some(tag => activeTags.includes(tags.find(t => t.title === tag)?.id));
+            const filtered = blogs.filter((blog) => {
+                return blog.tags.some((tag) => activeTags.includes(tags.find((t) => t.title === tag)?.id));
             });
             setFilteredBlogs(filtered);
         }
@@ -95,7 +94,10 @@ export default function BlogPage() {
     const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
     const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const onPageChange = (page) => {
+        setCurrentPage(page);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
         <div>
@@ -113,7 +115,7 @@ export default function BlogPage() {
                                 <p>Discover tips, guides, and other helpful content for travel companies. Use the filter below to find blog posts on a topic that interests you.</p>
                             </div>
                             <div className='blog__tags__block'>
-                                {Array.isArray(tags) ? tags?.map(tag => (
+                                {Array.isArray(tags) ? tags?.map((tag) => (
                                     <div
                                         key={tag.id}
                                         className={`blog__tag ${activeTags.includes(tag.id) ? 'active' : ''}`}
@@ -130,8 +132,12 @@ export default function BlogPage() {
                                 </div>
                             )}
                             <div className='blog__row'>
-                                {Array.isArray(currentBlogs) ? currentBlogs?.map(blog => (
-                                    <div onClick={() => navigate(`/blog/${blog.id}`, { state: { blog } })} className='block__item' key={blog.id}>
+                                {Array.isArray(currentBlogs) ? currentBlogs?.map((blog) => (
+                                    <div
+                                        onClick={() => navigate(`/blog/${blog.id}`, { state: { blog } })}
+                                        className='block__item'
+                                        key={blog.id}
+                                    >
                                         {getArticlesPreview(blog)}
                                         <div className='blog__head'>
                                             <div className='blog__date'>{format(new Date(blog?.createdAt), 'dd/MM/yyyy')}</div>
@@ -142,12 +148,13 @@ export default function BlogPage() {
                                     </div>
                                 )) : null}
                             </div>
-
                             <Pagination
-                                blogsPerPage={blogsPerPage}
-                                totalBlogs={filteredBlogs.length}
-                                paginate={paginate}
-                                currentPage={currentPage}
+                                current={currentPage}
+                                pageSize={blogsPerPage}
+                                total={filteredBlogs.length}
+                                onChange={onPageChange}
+                                showQuickJumper
+                                align='center'
                             />
                         </div>
                     </div>
@@ -156,37 +163,5 @@ export default function BlogPage() {
             <Footer />
             <ScrollToTopButton />
         </div>
-    );
-}
-
-function Pagination({ blogsPerPage, totalBlogs, paginate, currentPage }) {
-    const pageNumbers = [];
-
-    for (let i = 1; i <= Math.ceil(totalBlogs / blogsPerPage); i++) {
-        pageNumbers.push(i);
-    }
-
-    return (
-        <nav>
-            <ul className='pagination'>
-                <li>
-                    <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-                        &lt;
-                    </button>
-                </li>
-                {pageNumbers.map(number => (
-                    <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}`}>
-                        <button onClick={() => paginate(number)}>
-                            {number}
-                        </button>
-                    </li>
-                ))}
-                <li>
-                    <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === pageNumbers.length}>
-                        &gt;
-                    </button>
-                </li>
-            </ul>
-        </nav>
     );
 }

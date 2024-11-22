@@ -24,6 +24,7 @@
     flex-wrap: wrap;
     gap: 2%;
     row-gap: 20px;
+    margin-bottom: 40px;
 }
 
 .block__item {

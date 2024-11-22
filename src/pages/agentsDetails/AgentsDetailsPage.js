@@ -8,7 +8,6 @@ import { notification, Pagination } from 'antd'
 export default function AgentsDetailsPage() {
 
   const location = useLocation()
-  // const navigate = useNavigate()
 
   const [isAddModalOpen, setIsAddModalOpen] = useState('')
   const [activeTab, setActiveTab] = useState('Bookings');

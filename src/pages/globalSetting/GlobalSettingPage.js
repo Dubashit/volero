@@ -1,28 +1,60 @@
 import React, { useEffect, useState } from 'react'
 import './index.css'
 import { useLocation } from 'react-router-dom'
+import { notification } from 'antd'
+import { getGlobalSetting, postGlobalSetting } from '../../api'
 
 export default function GlobalSettingPage() {
 
     const location = useLocation()
 
-    const [globalPercent, setGlobalPercent] = useState(1)
-    const [globalDays, setGlobalDays] = useState(1)
+    const [globalPercent, setGlobalPercent] = useState('')
+    const [globalDays, setGlobalDays] = useState('')
 
     useEffect(() => {
-        setGlobalPercent(localStorage.getItem('globalPercent'))
-        setGlobalDays(localStorage.getItem('globalDays'))
+        fetchGlobalSetting()
         document.querySelector('.main__content__admin').scrollTo(0, 0)
     }, [location])
 
+    const fetchGlobalSetting = async () => {
+        const global = await getGlobalSetting()
+        
+        if(global){
+            // notification.success({
+            //     message: 'Successful',
+            //     description: 'Global settings loaded',
+            //     duration: 3,
+            // });
+            setGlobalPercent(global.percentage)
+            setGlobalDays(global.days)
+        }
+    }
+
     const sendFormData = async (e) => {
         e.preventDefault()
-        if (globalPercent !== null && globalDays) {
-            localStorage.setItem('globalPercent', globalPercent === null ? 1 : globalPercent)
-            localStorage.setItem('globalDays', globalDays === null ? 1 : globalDays)
-            alert("Saved")
+        if (globalPercent !== null && globalDays !== null) {
+            const global = await postGlobalSetting(globalPercent, globalDays)
+            if(global){
+                notification.success({
+                    message: 'Successful',
+                    description: 'Global settings has been saved',
+                    duration: 3,
+                });
+                setGlobalPercent(global.percentage)
+                setGlobalDays(global.days)
+            } else {
+                notification.error({
+                    message: 'Error',
+                    description: 'Server is not responding',
+                    duration: 3,
+                });
+            }
         } else {
-            alert('Please enter all fields')
+            notification.error({
+                message: 'Error',
+                description: 'Please enter all fields',
+                duration: 3,
+            });
         }
     }
 
